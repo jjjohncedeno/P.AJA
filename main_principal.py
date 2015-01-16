@@ -7,6 +7,7 @@ from PyQt4.QtCore import *
 from PyQt4.QtGui import *
 import lepl.apps.rfc3696
 from  Personal import *
+from Juego import *
 
 email_validator = lepl.apps.rfc3696.Email()
 estilo = open('./Ventanas/st.stylesheet','r').read()
@@ -18,6 +19,8 @@ ninos = uic.loadUiType('./Ventanas/ninos.ui')[0]
 representante = uic.loadUiType('./Ventanas/representante.ui')[0]
 #consultar = uic.loadUiType('consultar.ui')[0]
 #base = uic.loadUiType('base.ui')[0]
+juego=uic.loadUiType('./Ventanas/juego.ui')[0]
+
 
 class Login(QtGui.QDialog, login):
     #conexion = Conexion()
@@ -57,7 +60,7 @@ class Login(QtGui.QDialog, login):
     def keyPressEvent(self, event):
         if event.key() == Qt.Key_Escape:
             #super(LoginDialog, self).keyPressEvent(event)
-	    	print 'escape'
+            print 'escape'
 
     def quitarVentana(self):
         self.setWindowFlags(QtCore.Qt.FramelessWindowHint)
@@ -96,7 +99,8 @@ class Principal(QtGui.QMainWindow, ptaPrincipal):
         self.btnPersonal.clicked.connect(self.irPersonal)
         self.btnSemillero.clicked.connect(self.irSemillero)
         #self.btnContabilidad.clicked.connect(self.irContabilidad)
-        	
+        self.btnJuego.clicked.connect(self.irJuego)
+
     def irPersonal(self):
         personal=PantallaPersonal()
         personal.exec_()
@@ -105,6 +109,10 @@ class Principal(QtGui.QMainWindow, ptaPrincipal):
         semillero=PantallaSemillero()
         semillero.exec_()
 
+    def irJuego(self):
+        juego=PantallaJuego()
+        juego.exec_()
+    
     #def irContabilidad(self):
         #ptaContabilidad=PantallaContabilidad()
         #ptaContabilidad.exec_()
@@ -311,18 +319,77 @@ class PantallaRepresentante(QtGui.QDialog, representante):
 		self.setupUi(self)	
 
 
+class PantallaJuego(QtGui.QDialog,juego):
+    juego=Juego()
+    def __init__(self,parent=None):
+        QtGui.QDialog.__init__(self,parent)
+        self.setupUi(self)
+        self.inicializar()
 
+    def inicializar(self):
+         
+         self.setStyleSheet(estilo)
+         self.btnLimpiar.clicked.connect(self.limpiar)
+         self.btnGuardar.clicked.connect(self.guardar)
+         #self.txtNombre.textChanged.connect(self.onlyTextName)
+    
+    def validacion(self):
+        if(self.txtNombre.text=="" or self.txtImagen.text=="" or self.txtArea.text=="" or self.txtUbicacion.text==""):
+            return False
+            print "false"
+        else:
+            return True
+            print "true"
+        print(self.txtNombre.text)
+        print(self.txtImagen.text)
+        print(self.txtArea.text)
+        print(self.txtUbicacion.text)
+    def guardar(self):
+        if self.validacion():
+            QMessageBox.about(self,"ERROR","Ingresar todos los datos")
+           
+        else:
+            self.juego.nombre = str(self.txtNombre.text())
+            self.juego.imagen = str(self.txtImagen.text())
+            self.juego.area = str(self.txtArea.text())
+            self.juego.ubicacion = str(self.txtUbicacion.text())
+            self.juego.personal = str(self.cmbResponsable.text())
+            self.juego.guardar()
+            self.limpiar()
+            QMessageBox.about(self,"Correcto","Juego guardado con exito")
 
+    def limpiar(self):
+        self.txtNombre.setText('')
+        self.txtImagen.setText('')
+        self.txtArea.setText('')
+        self.txtUbicacion.setText('')
+        #self.cmbResponsable.setText('')
+
+    def cargarClientes(self):
+        model = QStandardItemModel()
+        model.setColumnCount(10)
+        model.setHorizontalHeaderLabels(self.juego.headernames)
+        for p in self.juego.consultar_todos():
+           
+            li = [p.nombre,p.imagen, p.area,p.ubicacion,p.personal]
+            row = []
+            for name in li:
+                item = QStandardItem(str(name))
+                item.setEditable(False)
+                row.append(item)
+
+            model.appendRow(row)
+        self.tbaJuego.setModel(model)
+        self.tbaJuegoEliminar.setModel(model)
+          
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
-    #if 
     log = Login()
     
     if log.exec_() == QtGui.QDialog.Accepted:
-        print 'holiwis'
-    	#log.close()
+            
+        #log.close()
         principal = Principal()
         principal.show()
-    
     sys.exit(app.exec_()) 
     sys.exit(log.close())
