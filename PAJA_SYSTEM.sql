@@ -1,4 +1,5 @@
 CREATE DATABASE  IF NOT EXISTS `PAJA_SYSTEM` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
 USE `PAJA_SYSTEM`;
 -- MySQL dump 10.13  Distrib 5.6.19, for linux-glibc2.5 (x86_64)
 --
