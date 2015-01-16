@@ -1,0 +1,7 @@
+*.py.swn
+*.py.swp
+*.py.swo
+*.pyc
+*.py~
+*.xlsx#
+*.docx#
