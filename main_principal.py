@@ -114,7 +114,7 @@ class PantallaPersonal(QtGui.QDialog, personal):
     tmp_lastname = ''
     tmp_cedula = ''
     tmp_telefono = ''
-    personal = []
+    personales = []
     personal = Personal()
 
     def __init__(self,parent=None):
@@ -131,7 +131,11 @@ class PantallaPersonal(QtGui.QDialog, personal):
         self.txt_correo.editingFinished.connect(self.checkMail)
         self.btn_guardar.clicked.connect(self.guardar)
         self.btn_limpiar.clicked.connect(self.limpiar)
-        self.cargarClientes()
+        self.btn_eliminar_selec.clicked.connect(self.borrarSelec)
+        self.btn_eliminar_todo.clicked.connect(self.borrarTodo)
+        self.btn_buscar.clicked.connect(self.buscar)
+        self.tb_personal.doubleClicked.connect(self.elegir_dobleclick)
+        self.cargarPersonal()
 
     def checkMail(self):
 		if not email_validator(str(self.txt_correo.text())):
@@ -141,9 +145,8 @@ class PantallaPersonal(QtGui.QDialog, personal):
 
 
     def guardar(self):
-        if self.checkMail:
+        if self.checkMail():
             QMessageBox.about(self,"ERROR","Ingresar un correo valido")
-        #self.limpiar()
         else:
 			self.personal.nombre = str(self.txt_nombre.text())
 			self.personal.apellido = str(self.txt_apellido.text())
@@ -157,20 +160,23 @@ class PantallaPersonal(QtGui.QDialog, personal):
 			self.personal.carrera = str(self.txt_carrera.text())
 			self.personal.facultad = str(self.txt_facultad.text())
 			self.personal.guardar()
-			#self.cargarClientes()
+ 			self.cargarPersonal()
 			self.limpiar()
 			QMessageBox.about(self,"Correcto","Cliente guardado con exito")
 
 
     
     def limpiar(self):
-		self.txt_nombre.setText('')
-		self.txt_apellido.setText('')
-		self.txt_cedula.setText('')
-		self.txt_direccion.setText('')
-		self.txt_correo.setText('')
-		self.txt_carrera.setText('')
-		self.txt_facultad.setText('')
+        self.personal.id=0
+        self.txt_nombre.setText('')
+        self.txt_apellido.setText('')
+        self.txt_cedula.setText('')
+        self.txt_direccion.setText('')
+        self.txt_telefono.setText('')
+        self.txt_correo.setText('')
+        self.txt_carrera.setText('')
+        self.txt_facultad.setText('')
+        
 
         
     def onlyText(self,texto):
@@ -243,30 +249,100 @@ class PantallaPersonal(QtGui.QDialog, personal):
 				self.tmp_telefono=''
 				self.txt_telefono.setText('')
 
-    def cargarClientes(self):
-        self.productos = []
+    def cargarPersonal(self,atribute=None, name=None):
+        self.personales = []
+        busq =[]
         model = QStandardItemModel()
         model.setColumnCount(10)
         model.setHorizontalHeaderLabels(self.personal.headernames)
-        for p in self.personal.consultar_todos():
-            #self.reportes[0] = self.reportes[0] + int(producto_o.cantidad)
-            #self.reportes[1] = self.reportes[1] + float(producto_o.precioUnit)
-            #self.reportes[2] = self.reportes[2] + float(producto_o.precioC)
-            #self.reportes[3] = self.reportes[3] + float(producto_o.precioV)
+        if (atribute is not None) and (name is not None):
+            if name == 'nombre' or name == 'apellido' or name == 'cedula':
+                busq = self.personal.consultar_By_Atribute(atribute,name)
+            else:
+                busq = []
+        else :
+            busq =self.personal.consultar_todos()
+        
+        
+        for p in busq:
 
+            tmp=[p.id,p.nombre,p.apellido,p.cedula,p.telefono,p.tipo,p.direccion,p.sexo,p.correo,p.carrera,p.facultad]
 
             li = [p.nombre,p.apellido, p.cedula,p.telefono,p.tipo,p.direccion,p.sexo,p.correo,p.carrera,p.facultad]
-            #self.productos.append(li)
+            self.personales.append(tmp)
             row = []
-            for name in li:
-                item = QStandardItem(str(name))
+            for nam in li:
+                item = QStandardItem(str(nam))
                 item.setEditable(False)
                 row.append(item)
-
+            
             model.appendRow(row)
         self.tb_personal.setModel(model)
-        self.tb_personal_eliminar
         self.tb_personal_eliminar.setModel(model)
+
+    def elegir_dobleclick(self):
+        selected = self.tb_personal.selectedIndexes()
+        selected_index = selected.__getitem__(0)
+        select = self.personales[selected_index.row()]
+        self.tabWidget.setCurrentWidget(self.tab_1)
+        self.personal.id = select[0]
+        self.txt_nombre.setText(select[1])
+        self.txt_apellido.setText(select[2])
+        #print select[3]
+        #print select[4]
+        self.txt_cedula.setText(str(select[3]))
+        self.txt_direccion.setText(str(select[6]))
+        self.txt_telefono.setText(str(select[4]))
+        self.txt_correo.setText(select[8])
+        self.cmb_tipo.setCurrentIndex(self.cmb_tipo.findText(select[5]))
+        self.cmb_sexo.setCurrentIndex(self.cmb_sexo.findText(select[7]))
+        self.txt_carrera.setText(str(select[9]))
+        self.txt_facultad.setText(str(select[10]))
+
+    def borrarTodo(self):
+        try:
+            rst=QMessageBox.warning(self,"Alerta","Esta seguro que desea eliminar", QMessageBox.Cancel, QMessageBox.Ok)
+            if rst == QMessageBox.Ok:
+                self.personal.borrarPersonales()
+                QMessageBox.about(self,"Correcto", "Se ha eliminado todo el personal")
+        except:
+            QMessageBox.about(self,"Error", "Problemas con la base de datos")
+        self.cargarPersonal()
+
+    def borrarSelec(self):
+        try:
+            selected = self.tb_personal_eliminar.selectedIndexes()
+            selected_index = selected.__getitem__(0)
+            select = self.personales[selected_index.row()]
+            self.personal.id = select[0]
+
+            rst=QMessageBox.warning(self,"Alerta","Esta seguro que desea eliminar", QMessageBox.Cancel, QMessageBox.Ok)
+            if rst == QMessageBox.Ok:
+                self.personal.borrarPersonal()
+                QMessageBox.about(self,"Correcto", "Se ha eliminado al Cliente")
+        except:
+            QMessageBox.about(self,"Error", "Problemas con la base de datos")
+        self.cargarPersonal()
+
+    def buscar(self):
+        atribute= (str(self.txt_buscar.text())).strip()
+        name=''
+        print atribute
+        if atribute != '':
+            if self.radioButton_nombre.isChecked():
+                name= 'nombre'
+                print 'nombre = entro'
+                self.cargarPersonal(atribute,name)
+            elif self.radioButton_apellido.isChecked():
+                name= 'apellido'
+                self.cargarPersonal(atribute,name)
+            elif self.radioButton_cedula.isChecked():
+                name= 'cedula'
+                self.cargarPersonal(atribute,name)
+            else:
+                self.cargarPersonal()
+        else:
+            self.cargarPersonal()
 
 		
 

@@ -42,10 +42,10 @@ class Personal(Objeto):
       cursor.close()
       self.modificar()
 
-  def borrarClientes(self):
+  def borrarPersonales(self):
     self.eliminar_todo()  
   
-  def borrarCliente(self):
+  def borrarPersonal(self):
     self.eliminar()
 
   def modificar(self):
