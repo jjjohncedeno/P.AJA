@@ -49,7 +49,7 @@ class Personal(Objeto):
     self.eliminar()
 
   def modificar(self):
-    query = (self.query_update+ 'personal_nombre= %s, personal_apellido= %s,personal_cedula= %s ,personal_telefono = %s,personal_tipo, personal_direccion = %s,personal_sexo = %s,personal_correo = %s,personal_carrera = %s,personal_facultad = %s' + self.query_update_end)
+    query = (self.query_update+ 'personal_nombre= %s, personal_apellido= %s,personal_cedula= %s ,personal_telefono = %s,personal_tipo=%s, personal_direccion = %s,personal_sexo = %s,personal_correo = %s,personal_carrera = %s,personal_facultad = %s' + self.query_update_end)
     conexion = self.conexion.getConnection()
     cursor= conexion.cursor()
     cursor.execute(query,(self.nombre,self.apellido,self.cedula,self.telefono,self.tipo,self.direccion,self.sexo,self.correo,self.carrera,self.facultad,self.id))
