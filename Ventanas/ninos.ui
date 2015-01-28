@@ -147,8 +147,8 @@
      <widget class="QPushButton" name="btn_representante">
       <property name="geometry">
        <rect>
-        <x>420</x>
-        <y>285</y>
+        <x>410</x>
+        <y>215</y>
         <width>35</width>
         <height>27</height>
        </rect>
@@ -200,76 +200,12 @@ background-color: transparent;
        <string>Guardar</string>
       </property>
      </widget>
-     <widget class="QWidget" name="layoutWidget_2">
-      <property name="geometry">
-       <rect>
-        <x>220</x>
-        <y>60</y>
-        <width>191</width>
-        <height>293</height>
-       </rect>
-      </property>
-      <layout class="QVBoxLayout" name="verticalLayout">
-       <item>
-        <widget class="QLineEdit" name="txt_nombre">
-         <property name="inputMethodHints">
-          <set>Qt::ImhHiddenText</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="txt_apellido">
-         <property name="inputMethodHints">
-          <set>Qt::ImhHiddenText</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="txt_edad">
-         <property name="inputMethodHints">
-          <set>Qt::ImhFormattedNumbersOnly</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QComboBox" name="cmb_alergia">
-         <item>
-          <property name="text">
-           <string>No</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Si</string>
-          </property>
-         </item>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="txt_observaciones">
-         <property name="inputMethodHints">
-          <set>Qt::ImhHiddenText</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="txt_semillero">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="inputMethodHints">
-          <set>Qt::ImhHiddenText</set>
-         </property>
-        </widget>
-       </item>
-      </layout>
-     </widget>
      <widget class="QWidget" name="layoutWidget">
       <property name="geometry">
        <rect>
-        <x>120</x>
+        <x>100</x>
         <y>60</y>
-        <width>101</width>
+        <width>103</width>
         <height>291</height>
        </rect>
       </property>
@@ -296,6 +232,13 @@ background-color: transparent;
         </widget>
        </item>
        <item>
+        <widget class="QLabel" name="label_5">
+         <property name="text">
+          <string>Representante</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QLabel" name="label_12">
          <property name="text">
           <string>Alergia</string>
@@ -309,14 +252,89 @@ background-color: transparent;
          </property>
         </widget>
        </item>
-       <item>
-        <widget class="QLabel" name="label_5">
-         <property name="text">
-          <string>Semillero</string>
-         </property>
-        </widget>
-       </item>
       </layout>
+     </widget>
+     <widget class="QLineEdit" name="txt_edad">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>165</y>
+        <width>189</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="inputMethodHints">
+       <set>Qt::ImhFormattedNumbersOnly</set>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="txt_observacion">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>315</y>
+        <width>189</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="inputMethodHints">
+       <set>Qt::ImhHiddenText</set>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="cmb_alergia">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>265</y>
+        <width>189</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>No</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>Si</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLineEdit" name="txt_nombre">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>65</y>
+        <width>189</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="inputMethodHints">
+       <set>Qt::ImhHiddenText</set>
+      </property>
+     </widget>
+     <widget class="QLineEdit" name="txt_apellido">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>115</y>
+        <width>189</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="inputMethodHints">
+       <set>Qt::ImhHiddenText</set>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="cmb_representante">
+      <property name="geometry">
+       <rect>
+        <x>220</x>
+        <y>215</y>
+        <width>189</width>
+        <height>27</height>
+       </rect>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="tab">
