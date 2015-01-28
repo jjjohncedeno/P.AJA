@@ -42,7 +42,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab_0">
      <attribute name="title">
@@ -292,18 +292,7 @@
         <widget class="QLineEdit" name="txtUbicacion"/>
        </item>
        <item>
-        <widget class="QComboBox" name="cmbResponsable">
-         <item>
-          <property name="text">
-           <string>JOhn</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Jairo</string>
-          </property>
-         </item>
-        </widget>
+        <widget class="QComboBox" name="cmbResponsable"/>
        </item>
       </layout>
      </widget>

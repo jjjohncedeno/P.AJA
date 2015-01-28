@@ -454,15 +454,18 @@ class PantallaRepresentante(QtGui.QDialog, representante):
 
 class PantallaJuego(QtGui.QDialog,juego):
     juego=Juego()
+    
     def __init__(self,parent=None):
         QtGui.QDialog.__init__(self,parent)
         self.setupUi(self)
+        self.personal=Personal()
         self.inicializar()
 
     def inicializar(self):
         self.ruta=''
         self.nombre_fichero=''
         self.juegos=[]
+        self.LlenarCombo()
         self.setStyleSheet(estilo)
         self.btnLimpiar.clicked.connect(self.limpiar)
         self.btnGuardar.clicked.connect(self.guardar)
@@ -480,11 +483,6 @@ class PantallaJuego(QtGui.QDialog,juego):
             return True            
         else:
             return False
-
-        print(self.txtNombre.text)
-        print(self.txtImagen.text)
-        print(self.txtArea.text)
-        print(self.txtUbicacion.text)
    
     def guardar(self):
         if self.validacion():
@@ -558,7 +556,8 @@ class PantallaJuego(QtGui.QDialog,juego):
         #self.cmb_tipo.setCurrentIndex(self.cmb_tipo.findText(select[5]))
     
     def LlenarCombo(self):
-            
+        for p in self.personal.consultar_todos():
+            self.cmbResponsable.addItem(p.nombre)
 
     def borrarTodo(self):
         try:
