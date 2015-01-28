@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>454</width>
-    <height>258</height>
+    <height>315</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -123,6 +123,28 @@ background-color: transparent;
      <string>Juego</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="btnOficio">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>230</y>
+      <width>98</width>
+      <height>27</height>
+     </rect>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">#btnOficio {
+	border: 1px solid transparent;
+	background-color: transparent;
+}</string>
+    </property>
+    <property name="text">
+     <string>Oficios</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
@@ -130,7 +152,7 @@ background-color: transparent;
      <x>0</x>
      <y>0</y>
      <width>454</width>
-     <height>27</height>
+     <height>29</height>
     </rect>
    </property>
   </widget>
