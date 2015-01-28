@@ -222,66 +222,6 @@ background-color: transparent;
        <string>Limpiar</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="btn_ninos">
-      <property name="geometry">
-       <rect>
-        <x>460</x>
-        <y>240</y>
-        <width>35</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">#btn_ninos {
-border: 1px solid transparent;
-background-color: transparent;
-
-}</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="icon">
-       <iconset>
-        <normaloff>Imagenes/personal_agregar.jpeg</normaloff>Imagenes/personal_agregar.jpeg</iconset>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>35</width>
-        <height>27</height>
-       </size>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="btn_representante">
-      <property name="geometry">
-       <rect>
-        <x>460</x>
-        <y>282</y>
-        <width>35</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">#btn_representante {
-border: 1px solid transparent;
-background-color: transparent;
-
-}</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="icon">
-       <iconset>
-        <normaloff>Imagenes/personal_agregar.jpeg</normaloff>Imagenes/personal_agregar.jpeg</iconset>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>35</width>
-        <height>27</height>
-       </size>
-      </property>
-     </widget>
      <widget class="QWidget" name="verticalLayoutWidget">
       <property name="geometry">
        <rect>
@@ -442,7 +382,7 @@ background-color: transparent;
        </rect>
       </property>
      </widget>
-     <widget class="QPushButton" name="btn_ninos_2">
+     <widget class="QPushButton" name="btn_ninos">
       <property name="geometry">
        <rect>
         <x>460</x>

@@ -100,6 +100,7 @@ class Objeto():
 
   def mapeardatos(self, datarow):
     pass
+
   def consultar(self):
     query = self.query_select_me
     print query
