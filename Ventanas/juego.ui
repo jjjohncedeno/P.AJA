@@ -32,7 +32,7 @@
      <height>491</height>
     </rect>
    </property>
-   <widget class="QTabWidget" name="tabWidget_2">
+   <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
       <x>0</x>
@@ -44,11 +44,11 @@
     <property name="currentIndex">
      <number>1</number>
     </property>
-    <widget class="QWidget" name="tab_3">
+    <widget class="QWidget" name="tab_0">
      <attribute name="title">
       <string>Consultar</string>
      </attribute>
-     <widget class="QRadioButton" name="rdoDescripcion">
+     <widget class="QRadioButton" name="rdoNombre">
       <property name="geometry">
        <rect>
         <x>20</x>
@@ -58,7 +58,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Buscar por Descripcion</string>
+       <string>Buscar por Nombre</string>
       </property>
      </widget>
      <widget class="QLabel" name="label_14">
@@ -79,7 +79,7 @@
        <string>CONSULTAR JUEGO</string>
       </property>
      </widget>
-     <widget class="QRadioButton" name="rdoPersonal">
+     <widget class="QRadioButton" name="rdoUbicacion">
       <property name="geometry">
        <rect>
         <x>430</x>
@@ -89,13 +89,13 @@
        </rect>
       </property>
       <property name="text">
-       <string>Buscar por Personal</string>
+       <string>Buscar por Ubicacion</string>
       </property>
      </widget>
      <widget class="QLineEdit" name="txtBuscar">
       <property name="geometry">
        <rect>
-        <x>150</x>
+        <x>160</x>
         <y>90</y>
         <width>191</width>
         <height>27</height>
@@ -115,7 +115,7 @@
        <string>Buscar</string>
       </property>
      </widget>
-     <widget class="QRadioButton" name="rdoRepresentante">
+     <widget class="QRadioButton" name="rdoArea">
       <property name="geometry">
        <rect>
         <x>220</x>
@@ -125,7 +125,7 @@
        </rect>
       </property>
       <property name="text">
-       <string>Buscar por Representante</string>
+       <string>Buscar por Area</string>
       </property>
      </widget>
      <widget class="QTableView" name="tbaJuego">
@@ -139,7 +139,7 @@
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="tab_4">
+    <widget class="QWidget" name="tab_1">
      <attribute name="title">
       <string>Ingresar</string>
      </attribute>
@@ -200,9 +200,9 @@
      <widget class="QWidget" name="verticalLayoutWidget">
       <property name="geometry">
        <rect>
-        <x>120</x>
+        <x>31</x>
         <y>70</y>
-        <width>122</width>
+        <width>121</width>
         <height>231</height>
        </rect>
       </property>
@@ -216,21 +216,6 @@
          </property>
          <property name="text">
           <string>Nombre</string>
-         </property>
-         <property name="alignment">
-          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLabel" name="label_17">
-         <property name="font">
-          <font>
-           <pointsize>12</pointsize>
-          </font>
-         </property>
-         <property name="text">
-          <string>Imagen</string>
          </property>
          <property name="alignment">
           <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -290,7 +275,7 @@
      <widget class="QWidget" name="verticalLayoutWidget_2">
       <property name="geometry">
        <rect>
-        <x>260</x>
+        <x>160</x>
         <y>70</y>
         <width>211</width>
         <height>231</height>
@@ -301,63 +286,43 @@
         <widget class="QLineEdit" name="txtNombre"/>
        </item>
        <item>
-        <widget class="QLineEdit" name="txtImagen"/>
-       </item>
-       <item>
         <widget class="QLineEdit" name="txtArea"/>
        </item>
        <item>
         <widget class="QLineEdit" name="txtUbicacion"/>
        </item>
        <item>
-        <widget class="QComboBox" name="cmbResponsable">
-         <item>
-          <property name="text">
-           <string>JOhn</string>
-          </property>
-         </item>
-         <item>
-          <property name="text">
-           <string>Jairo</string>
-          </property>
-         </item>
-        </widget>
+        <widget class="QComboBox" name="cmbResponsable"/>
        </item>
       </layout>
      </widget>
-     <widget class="QPushButton" name="btn_imagen">
+     <widget class="QLabel" name="txtImagen">
       <property name="geometry">
        <rect>
-        <x>480</x>
-        <y>130</y>
-        <width>31</width>
-        <height>27</height>
+        <x>380</x>
+        <y>70</y>
+        <width>241</width>
+        <height>151</height>
        </rect>
-      </property>
-      <property name="font">
-       <font>
-        <pointsize>12</pointsize>
-       </font>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">#btn_imagen{
-border: 1px solid transparent;
-background-color: transparent;
-
-}</string>
       </property>
       <property name="text">
        <string/>
       </property>
-      <property name="icon">
-       <iconset>
-        <normaloff>../Imagenes/search.png</normaloff>../Imagenes/search.png</iconset>
+      <property name="scaledContents">
+       <bool>true</bool>
       </property>
-      <property name="iconSize">
-       <size>
-        <width>60</width>
-        <height>65</height>
-       </size>
+     </widget>
+     <widget class="QPushButton" name="btnImagen">
+      <property name="geometry">
+       <rect>
+        <x>450</x>
+        <y>240</y>
+        <width>95</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Imagen</string>
       </property>
      </widget>
     </widget>

@@ -32,9 +32,13 @@ CREATE TABLE `Nino` (
   `nino_esAlergico` varchar(2) NOT NULL,
   `nino_observacion` varchar(45) DEFAULT NULL,
   `nino_semillero` int(12) NOT NULL,
+<<<<<<< HEAD
   PRIMARY KEY (`nino_id`,`nino_semillero`),
   KEY `fk_nino_semillero_idx` (`nino_semillero`),
   CONSTRAINT `fk_nino_semillero` FOREIGN KEY (`nino_semillero`) REFERENCES `Semillero` (`semillero_id`) ON DELETE CASCADE ON UPDATE CASCADE
+=======
+  PRIMARY KEY (`nino_id`)
+>>>>>>> b961b0cd1336c18ff2d8be191f5af5ea98dd1193
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -44,7 +48,10 @@ CREATE TABLE `Nino` (
 
 LOCK TABLES `Nino` WRITE;
 /*!40000 ALTER TABLE `Nino` DISABLE KEYS */;
+<<<<<<< HEAD
 INSERT INTO `Nino` VALUES (1,'david','',3,'No','',5);
+=======
+>>>>>>> b961b0cd1336c18ff2d8be191f5af5ea98dd1193
 /*!40000 ALTER TABLE `Nino` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,6 +89,7 @@ INSERT INTO `Personal` VALUES (1,'julio','realpe',49,494,'Ayudante','fjkf','Masc
 UNLOCK TABLES;
 
 --
+<<<<<<< HEAD
 -- Table structure for table `Representante`
 --
 
@@ -97,10 +105,24 @@ CREATE TABLE `Representante` (
   `representante_nInscritos` int(12) NOT NULL,
   `representante_nino` int(12) NOT NULL,
   PRIMARY KEY (`representante_id`,`representante_nino`)
+=======
+-- Table structure for table `Usuario`
+--
+
+DROP TABLE IF EXISTS `Usuario`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Usuario` (
+  `usuario_id` int(11) NOT NULL,
+  `usuario_username` varchar(15) NOT NULL,
+  `usuario_password` varchar(15) NOT NULL,
+  PRIMARY KEY (`usuario_id`)
+>>>>>>> b961b0cd1336c18ff2d8be191f5af5ea98dd1193
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
+<<<<<<< HEAD
 -- Dumping data for table `Representante`
 --
 
@@ -137,6 +159,14 @@ LOCK TABLES `Semillero` WRITE;
 /*!40000 ALTER TABLE `Semillero` DISABLE KEYS */;
 INSERT INTO `Semillero` VALUES (1,'popo',0,'','por lo banos',1),(2,'popo',0,'','banos',1),(3,'popo',0,'','bano',1),(4,'popo',0,'','bano',1),(5,'popo',0,'','bano',1);
 /*!40000 ALTER TABLE `Semillero` ENABLE KEYS */;
+=======
+-- Dumping data for table `Usuario`
+--
+
+LOCK TABLES `Usuario` WRITE;
+/*!40000 ALTER TABLE `Usuario` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Usuario` ENABLE KEYS */;
+>>>>>>> b961b0cd1336c18ff2d8be191f5af5ea98dd1193
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -148,4 +178,38 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+LOCK TABLES `Usuario` WRITE;
+/*!40000 ALTER TABLE `Usuario` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Usuario` ENABLE KEYS */;
+UNLOCK TABLES;
+-- Dump completed on 2015-01-25 23:08:04
+
+
+DROP TABLE IF EXISTS `Juego`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Juego` (
+  `juego_id` int(11) AUTO_INCREMENT,
+  `juego_nombre` varchar(15) NULL,
+  `juego_imagen` varchar(15) NULL,
+  `juego_area` varchar(15) NULL,
+  `juego_ubicacion` varchar(15) NULL,
+  `juego_IdPersonal` int(11)  NULL,
+  PRIMARY KEY (`juego_id`),
+  FOREIGN KEY (juego_IdPersonal) REFERENCES Personal(personal_id)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Usuario`
+--
+
+LOCK TABLES `Juego` WRITE;
+/*!40000 ALTER TABLE `Juego` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Juego` ENABLE KEYS */;
+UNLOCK TABLES;
+
+<<<<<<< HEAD
 -- Dump completed on 2015-01-28 14:15:38
+=======
+>>>>>>> b961b0cd1336c18ff2d8be191f5af5ea98dd1193

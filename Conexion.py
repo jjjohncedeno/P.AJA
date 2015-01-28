@@ -7,3 +7,4 @@ class Conexion():
    def getConnection(self):
       conexion= mysql.connector.connect(user=self.user, password=self.pwd,host=self.host,database=self.database)
       return conexion
+

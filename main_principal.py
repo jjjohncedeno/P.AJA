@@ -9,9 +9,15 @@ import lepl.apps.rfc3696
 from  Personal import *
 from Juego import *
 from Nino import *
+<<<<<<< HEAD
 from Semillero import *
 from Representante import *
 
+=======
+from Conexion import *
+from Oficio import *
+#from Semillero import *
+>>>>>>> b961b0cd1336c18ff2d8be191f5af5ea98dd1193
 email_validator = lepl.apps.rfc3696.Email()
 estilo = open('./Ventanas/st.stylesheet','r').read()
 login = uic.loadUiType('./Ventanas/login.ui')[0]
@@ -20,6 +26,7 @@ semillero = uic.loadUiType('./Ventanas/semillero.ui')[0]
 ptaPrincipal = uic.loadUiType('./Ventanas/principal.ui')[0]
 ninos = uic.loadUiType('./Ventanas/ninos.ui')[0]
 representante = uic.loadUiType('./Ventanas/representante.ui')[0]
+oficio = uic.loadUiType('./Ventanas/oficio.ui')[0]
 #consultar = uic.loadUiType('consultar.ui')[0]
 #base = uic.loadUiType('base.ui')[0]
 juego=uic.loadUiType('./Ventanas/juego.ui')[0]
@@ -100,22 +107,26 @@ class Principal(QtGui.QMainWindow, ptaPrincipal):
     def inicializar(self):
         self.setStyleSheet(estilo )
         self.btnPersonal.clicked.connect(self.irPersonal)
-        self.btnSemillero.clicked.connect(self.irSemillero)
+        #self.btnSemillero.clicked.connect(self.irSemillero)
         #self.btnContabilidad.clicked.connect(self.irContabilidad)
         self.btnJuego.clicked.connect(self.irJuego)
+        self.btnOficio.clicked.connect(self.irOficio)
 
     def irPersonal(self):
         personal=PantallaPersonal()
         personal.exec_()
 		 
-    def irSemillero(self):
-        semillero=PantallaSemillero()
-        semillero.exec_()
+   # def irSemillero(self):
+    #    semillero=PantallaSemillero()
+     #   semillero.exec_()
 
     def irJuego(self):
         juego=PantallaJuego()
         juego.exec_()
     
+    def irOficio(self):
+        oficio=PantallaOficio()
+        oficio.exec_()
     #def irContabilidad(self):
         #ptaContabilidad=PantallaContabilidad()
         #ptaContabilidad.exec_()
@@ -267,7 +278,11 @@ class PantallaPersonal(QtGui.QDialog, personal):
         model.setColumnCount(10)
         model.setHorizontalHeaderLabels(self.personal.headernames)
         
+<<<<<<< HEAD
 	if (atribute is not None) and (name is not None):
+=======
+        if (atribute is not None) and (name is not None):
+>>>>>>> b961b0cd1336c18ff2d8be191f5af5ea98dd1193
             if name == 'nombre' or name == 'apellido' or name == 'cedula':
                 busq = self.personal.consultar_By_Atribute(atribute,name)
             else:
@@ -356,14 +371,17 @@ class PantallaPersonal(QtGui.QDialog, personal):
             self.cargarPersonal()
 
 		
-
+"""
 class PantallaSemillero(QtGui.QDialog, semillero):
     
     select = ''
     personal = Personal()
     nino = Nino()
     semillero = Semillero()
+<<<<<<< HEAD
     ninos = []
+=======
+>>>>>>> b961b0cd1336c18ff2d8be191f5af5ea98dd1193
 
     def __init__(self,parent=None):
         QtGui.QDialog.__init__(self, parent)
@@ -371,8 +389,13 @@ class PantallaSemillero(QtGui.QDialog, semillero):
         self.inicializar()
        
     def inicializar(self):
+<<<<<<< HEAD
         #self.btn_ninos.setStyleSheet("background-color: transparent")
         #self.btn_ninos.setStyleSheet("border: 0px solid transparent")
+=======
+        self.btn_ninos.setStyleSheet("background-color: transparent")
+        self.btn_ninos.setStyleSheet("border: 0px solid transparent")
+>>>>>>> b961b0cd1336c18ff2d8be191f5af5ea98dd1193
         self.btn_ninos.setIcon(QIcon('./Imagenes/personal_agregar.png'))
         self.btn_ninos.setIconSize(QSize(35,25))
 
@@ -387,8 +410,12 @@ class PantallaSemillero(QtGui.QDialog, semillero):
         #self.btn_ninos.setStyleSheet("border: 0px solid transparent")
         self.btn_ninos.setIcon(QIcon('./Imagenes/personal_agregar.png'))
         self.btn_ninos.setIconSize(QSize(35,25))
+<<<<<<< HEAD
         self.btn_ninos.clicked.connect(self.agregarNino)
         self.btn_guardar.clicked.connect(self.guardar)
+=======
+        self.btn_ninos.clicked.connect(self.irNino)
+>>>>>>> b961b0cd1336c18ff2d8be191f5af5ea98dd1193
 		#self.btn_image.setStyleShett()
 		#self.btn_imagen.connect(self.irSearchFile)
 
@@ -404,6 +431,7 @@ class PantallaSemillero(QtGui.QDialog, semillero):
         for n in self.nino.consultar_todos():
               self.cmb_ninos.addItem(n.nombre,n.id)
     
+<<<<<<< HEAD
     def agregarNino(self):
         nino= PantallaNino()
         nino.exec_()
@@ -420,6 +448,11 @@ class PantallaSemillero(QtGui.QDialog, semillero):
         print n.nombre
         self.ninos.append(n)
         #self.actualizar()
+=======
+    def irNino(self):
+        nino= PantallaNino()
+        nino.exec_()
+>>>>>>> b961b0cd1336c18ff2d8be191f5af5ea98dd1193
     
     def validarDatos(self):
         try:
@@ -429,6 +462,7 @@ class PantallaSemillero(QtGui.QDialog, semillero):
             return False
         return True
 
+<<<<<<< HEAD
 
     def guardar(self):
         if not self.validarDatos():
@@ -452,7 +486,29 @@ class PantallaSemillero(QtGui.QDialog, semillero):
         self.txt_tipo.setText('')
         self.txt_imagen.setText('')
         self.txt_ubicacion.setText('')
+=======
+>>>>>>> b961b0cd1336c18ff2d8be191f5af5ea98dd1193
 
+    def guardar(self):
+        if self.validarDatos():
+            QMessageBox.about(self,"ERROR","Ingrese un tipo de semillero")
+        else:
+            self.semillero.tipo = star(self.txt_nombre.text())
+            self.semillero.imagen = str(self.txt_apellido.text())
+            self.semillero.ubicacion = str(self.txt_cedula.text())
+            self.semillero.personal.id = str(self.txt_direccion.text())
+            self.semillero.telefono = str(self.txt_telefono.text())
+            self.semillero.nIntegrantes = len(self.semillero.ninos)
+            self.semillero.guardar()
+            #self.cargarPersonal()
+            #self.limpiar()
+            QMessageBox.about(self,"Correcto","Cliente guardado con exito")
+    
+    def limpiar():
+        self.txt_tipo.setText('')
+        self.txt_imagen.setText('')
+        self.txt_ubicacion.setText('')
+"""
 
 class PantallaNino(QtGui.QDialog, ninos):
     nino = Nino()
@@ -550,57 +606,94 @@ class PantallaRepresentante(QtGui.QDialog, representante):
 
 class PantallaJuego(QtGui.QDialog,juego):
     juego=Juego()
+    
     def __init__(self,parent=None):
         QtGui.QDialog.__init__(self,parent)
         self.setupUi(self)
+        self.personal=Personal()
         self.inicializar()
 
     def inicializar(self):
+<<<<<<< HEAD
          
         self.setStyleSheet(estilo)
         self.btnLimpiar.clicked.connect(self.limpiar)
         self.btnGuardar.clicked.connect(self.guardar)
         #self.txtNombre.textChanged.connect(self.onlyTextName)
     
+=======
+        self.ruta=''
+        self.nombre_fichero=''
+        self.juegos=[]
+        self.LlenarCombo()
+        self.setStyleSheet(estilo)
+        self.btnLimpiar.clicked.connect(self.limpiar)
+        self.btnGuardar.clicked.connect(self.guardar)
+        self.btnImagen.clicked.connect(self.abrir)
+        self.btnEliminar.clicked.connect(self.borrarTodo)
+        self.tbaJuego.doubleClicked.connect(self.elegir_dobleclick)
+        self.btnBuscar.clicked.connect(self.buscar)
+        self.tbaJuegoEliminar.doubleClicked.connect(self.borrarSelec)        
+	#self.txtNombre.textChanged.connect(self.onlyTextName)
+    	self.cargar()
+
+>>>>>>> b961b0cd1336c18ff2d8be191f5af5ea98dd1193
     def validacion(self):
-        if(self.txtNombre.text=="" or self.txtImagen.text=="" or self.txtArea.text=="" or self.txtUbicacion.text==""):
-            return False
-            print "false"
+       
+        if(self.txtNombre.text()=="" or self.txtArea.text()=="" or self.txtUbicacion.text()==""):
+            return True            
         else:
-            return True
-            print "true"
-        print(self.txtNombre.text)
-        print(self.txtImagen.text)
-        print(self.txtArea.text)
-        print(self.txtUbicacion.text)
+            return False
+   
     def guardar(self):
         if self.validacion():
             QMessageBox.about(self,"ERROR","Ingresar todos los datos")
            
         else:
             self.juego.nombre = str(self.txtNombre.text())
-            self.juego.imagen = str(self.txtImagen.text())
             self.juego.area = str(self.txtArea.text())
             self.juego.ubicacion = str(self.txtUbicacion.text())
-            self.juego.personal = str(self.cmbResponsable.text())
+            self.juego.imagen = str(self.nombre_fichero)
+            self.juego.personal = str(1)
             self.juego.guardar()
             self.limpiar()
             QMessageBox.about(self,"Correcto","Juego guardado con exito")
+            self.cargar()
 
     def limpiar(self):
         self.txtNombre.setText('')
-        self.txtImagen.setText('')
         self.txtArea.setText('')
         self.txtUbicacion.setText('')
         #self.cmbResponsable.setText('')
+        self.txtImagen.setPixmap(QPixmap(''))
+	#def CargarPersonal(self):
+    
+    def abrir(self):
+        self.nombre_fichero = QFileDialog.getOpenFileName(self, "Abrir fichero", self.ruta)
+        if self.nombre_fichero:
+            fichero_actual = self.nombre_fichero
+            self.ruta = QFileInfo(self.nombre_fichero).path()	
+            self.txtImagen.setPixmap(QPixmap(self.nombre_fichero))
+            self.txtImagen.setScaledContents(True)	
 
-    def cargarClientes(self):
+    def cargar(self, atribute=None, name=None):
         model = QStandardItemModel()
-        model.setColumnCount(10)
+        model.setColumnCount(5)
         model.setHorizontalHeaderLabels(self.juego.headernames)
-        for p in self.juego.consultar_todos():
-           
+        busq1 = []
+        self.juegos=[]
+        if (atribute is not None) and (name is not None):
+            if name == 'nombre' or name == 'area' or name == 'cedula':
+                busq1 = self.juego.consultar_By_Atribute(atribute,name)
+            else:
+                busq1=[]        
+        else:
+             busq1 = self.juego.consultar_todos()
+
+        for p in busq1:
+            tmp = [p.id, p.nombre,p.imagen, p.area,p.ubicacion,p.personal]
             li = [p.nombre,p.imagen, p.area,p.ubicacion,p.personal]
+            self.juegos.append(tmp)
             row = []
             for name in li:
                 item = QStandardItem(str(name))
@@ -610,7 +703,213 @@ class PantallaJuego(QtGui.QDialog,juego):
             model.appendRow(row)
         self.tbaJuego.setModel(model)
         self.tbaJuegoEliminar.setModel(model)
-          
+
+    def elegir_dobleclick(self):
+        selected = self.tbaJuego.selectedIndexes()
+        selected_index = selected.__getitem__(0)
+        select = self.juegos[selected_index.row()]
+        self.tabWidget.setCurrentWidget(self.tab_1)
+        self.juego.id = select[0]
+        self.txtNombre.setText(select[1])
+        self.txtImagen.setPixmap(QPixmap(select[2]))
+        self.txtArea.setText(str(select[3]))
+        self.txtUbicacion.setText(str(select[4]))
+        #self.cmb_tipo.setCurrentIndex(self.cmb_tipo.findText(select[5]))
+    
+    def LlenarCombo(self):
+        for p in self.personal.consultar_todos():
+            self.cmbResponsable.addItem(p.nombre)
+
+    def borrarTodo(self):
+        try:
+            rst=QMessageBox.warning(self,"Alerta","Esta seguro que desea eliminar", QMessageBox.Cancel, QMessageBox.Ok)
+            if rst == QMessageBox.Ok:
+                self.juego.borrarJuegos()
+                QMessageBox.about(self,"Correcto", "Se ha eliminado todo el personal")
+        except:
+            QMessageBox.about(self,"Error", "Problemas con la base de datos")
+        self.cargar()
+
+    def borrarSelec(self):
+        try:
+            selected = self.tbaJuegoEliminar.selectedIndexes()
+            selected_index = selected.__getitem__(0)
+            select = self.juegos[selected_index.row()]
+            self.juego.id = select[0]
+
+            rst=QMessageBox.warning(self,"Alerta","Esta seguro que desea eliminar", QMessageBox.Cancel, QMessageBox.Ok)
+            if rst == QMessageBox.Ok:
+                self.juego.borrarJuego()
+                QMessageBox.about(self,"Correcto", "Se ha eliminado al Cliente")
+        except:
+            QMessageBox.about(self,"Error", "Problemas con la base de datos")
+        self.cargar()
+
+    def buscar(self):
+        atribute= (str(self.txtBuscar.text())).strip()
+        name=''
+        print atribute
+        if atribute != '':
+            if self.rdoNombre.isChecked():
+                name= 'nombre'
+                
+                self.cargar(atribute,name)
+            elif self.rdoArea.isChecked():
+                name= 'area'
+                self.cargar(atribute,name)
+            elif self.rdoUbicacion.isChecked():
+                name= 'ubicacion'
+                self.cargar(atribute,name)
+            else:
+                self.cargar()
+        else:
+            self.cargar()
+
+
+class PantallaOficio(QtGui.QDialog,oficio):
+    oficio=Oficio()
+    
+    def __init__(self,parent=None):
+        QtGui.QDialog.__init__(self,parent)
+        self.setupUi(self)
+        self.personal=Personal()
+        self.inicializar()
+
+    def inicializar(self):
+        self.oficios=[]
+        self.setStyleSheet(estilo)
+        self.btnLimpiar.clicked.connect(self.limpiar)
+        self.btnGuardar.clicked.connect(self.guardar)
+        self.btnEliminar.clicked.connect(self.borrarTodo)
+        self.tbaOficio.doubleClicked.connect(self.elegir_dobleclick)
+        #self.btnBuscar.clicked.connect(self.buscar)
+        self.tbaOficioEliminar.doubleClicked.connect(self.borrarSelec)        
+	#self.txtNombre.textChanged.connect(self.onlyTextName)
+        self.cargar()
+
+    def validacion(self):
+       
+        if(self.txtDetalle.text()=="" or self.txtDestinatario.text()=="" or self.txtTramite.text()=="" or self.txtRespuesta=="" or self.txtObservaciones.text()==""):
+            return True            
+        else:
+            return False
+   
+    def guardar(self):
+        if self.validacion():
+            QMessageBox.about(self,"ERROR","Ingresar todos los datos")
+           
+        else:
+            self.oficio.Detalle = str(self.txtDetalle.text())
+            self.oficio.Destinatario = str(self.txtDestinatario.text())
+            self.oficio.Estado = str(self.cmbEstado.currentText())
+            self.oficio.Tramite = str(self.txtTramite.text())
+            self.oficio.Respuesta = str(self.txtRespuesta.text())
+            self.oficio.Observaciones = str(self.txtObservaciones.text())
+            self.oficio.personal = str(1)
+            self.oficio.guardar()
+            self.limpiar()
+            QMessageBox.about(self,"Correcto","Oficio guardado con exito")
+            self.cargar()
+
+    def limpiar(self):
+        self.txtDetalle.setText('')
+        self.txtDestinatario.setText('')
+        self.txtObservaciones.setText('')
+        self.txtRespuesta.setText('')
+        self.txtTramite.setText('')
+	#def CargarPersonal(self):
+   
+    def cargar(self, atribute=None, name=None):
+        model = QStandardItemModel()
+        model.setColumnCount(7)
+        model.setHorizontalHeaderLabels(self.oficio.headernames)
+        busq1 = []
+        self.oficios=[]
+        if (atribute is not None) and (name is not None):
+            if name == 'nombre' or name == 'area' or name == 'cedula':
+                busq1 = self.oficio.consultar_By_Atribute(atribute,name)
+            else:
+                busq1=[]        
+        else:
+             busq1 = self.oficio.consultar_todos()
+
+        for o in busq1:
+            tmp = [o.id, o.Detalle,o.Destinatario, o.Estado,o.Tramite,o.Respuesta, o.Observaciones, o.personal]
+            li = [o.Detalle,o.Destinatario, o.Estado,o.Tramite,o.Respuesta, o.Observaciones, o.personal]
+            self.oficios.append(tmp)
+            row = []
+            for name in li:
+                item = QStandardItem(str(name))
+                item.setEditable(False)
+                row.append(item)
+
+            model.appendRow(row)
+        self.tbaOficio.setModel(model)
+        self.tbaOficioEliminar.setModel(model)
+
+    def elegir_dobleclick(self):
+        selected = self.tbaOficio.selectedIndexes()
+        selected_index = selected.__getitem__(0)
+        select = self.oficios[selected_index.row()]
+        self.tabWidget.setCurrentWidget(self.tab_1)
+        self.oficio.id = select[0]
+        self.txtDetalle.setText(select[1])
+        self.txtDestinatario.setText(select[2])
+        self.cmbEstado.findText(select[3])
+        self.txtTramite.setText(select[4])
+        self.txtRespuesta.setText(select[5])
+        self.txtObservaciones.setText(select[6])
+        #self.cmb_tipo.setCurrentIndex(self.cmb_tipo.findText(select[5]))
+    
+    def LlenarCombo(self):
+        for p in self.personal.consultar_todos():
+            self.cmbResponsable.addItem(p.nombre)
+
+    def borrarTodo(self):
+        try:
+            rst=QMessageBox.warning(self,"Alerta","Esta seguro que desea eliminar", QMessageBox.Cancel, QMessageBox.Ok)
+            if rst == QMessageBox.Ok:
+                self.oficio.borrarOficios()
+                QMessageBox.about(self,"Correcto", "Se ha eliminado todo el personal")
+        except:
+            QMessageBox.about(self,"Error", "Problemas con la base de datos")
+        self.cargar()
+
+    def borrarSelec(self):
+        try:
+            selected = self.tbaOficioEliminar.selectedIndexes()
+            selected_index = selected.__getitem__(0)
+            select = self.ofcios[selected_index.row()]
+            self.oficio.id = select[0]
+
+            rst=QMessageBox.warning(self,"Alerta","Esta seguro que desea eliminar", QMessageBox.Cancel, QMessageBox.Ok)
+            if rst == QMessageBox.Ok:
+                self.juego.borrarOficio()
+                QMessageBox.about(self,"Correcto", "Se ha eliminado al Cliente")
+        except:
+            QMessageBox.about(self,"Error", "Problemas con la base de datos")
+        self.cargar()
+"""
+    def buscar(self):
+        atribute= (str(self.txtBuscar.text())).strip()
+        name=''
+        print atribute
+        if atribute != '':
+            if self.rdoNombre.isChecked():
+                name= 'nombre'
+                
+                self.cargar(atribute,name)
+            elif self.rdoArea.isChecked():
+                name= 'area'
+                self.cargar(atribute,name)
+            elif self.rdoUbicacion.isChecked():
+                name= 'ubicacion'
+                self.cargar(atribute,name)
+            else:
+                self.cargar()
+        else:
+            self.cargar()
+"""
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
     log = Login()
