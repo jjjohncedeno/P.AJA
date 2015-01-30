@@ -9,15 +9,13 @@ import lepl.apps.rfc3696
 from  Personal import *
 from Juego import *
 from Nino import *
-<<<<<<< HEAD
 from Semillero import *
 from Representante import *
 
-=======
 from Conexion import *
 from Oficio import *
 #from Semillero import *
->>>>>>> b961b0cd1336c18ff2d8be191f5af5ea98dd1193
+
 email_validator = lepl.apps.rfc3696.Email()
 estilo = open('./Ventanas/st.stylesheet','r').read()
 login = uic.loadUiType('./Ventanas/login.ui')[0]
@@ -107,18 +105,19 @@ class Principal(QtGui.QMainWindow, ptaPrincipal):
     def inicializar(self):
         self.setStyleSheet(estilo )
         self.btnPersonal.clicked.connect(self.irPersonal)
-        #self.btnSemillero.clicked.connect(self.irSemillero)
+        self.btnSemillero.clicked.connect(self.irSemillero)
         #self.btnContabilidad.clicked.connect(self.irContabilidad)
         self.btnJuego.clicked.connect(self.irJuego)
         self.btnOficio.clicked.connect(self.irOficio)
+        self.btnContabilidad.hide()
 
     def irPersonal(self):
         personal=PantallaPersonal()
         personal.exec_()
 		 
-   # def irSemillero(self):
-    #    semillero=PantallaSemillero()
-     #   semillero.exec_()
+    def irSemillero(self):
+        semillero=PantallaSemillero()
+        semillero.exec_()
 
     def irJuego(self):
         juego=PantallaJuego()
@@ -278,11 +277,10 @@ class PantallaPersonal(QtGui.QDialog, personal):
         model.setColumnCount(10)
         model.setHorizontalHeaderLabels(self.personal.headernames)
         
-<<<<<<< HEAD
-	if (atribute is not None) and (name is not None):
-=======
+
+    	
         if (atribute is not None) and (name is not None):
->>>>>>> b961b0cd1336c18ff2d8be191f5af5ea98dd1193
+    
             if name == 'nombre' or name == 'apellido' or name == 'cedula':
                 busq = self.personal.consultar_By_Atribute(atribute,name)
             else:
@@ -292,7 +290,7 @@ class PantallaPersonal(QtGui.QDialog, personal):
         
         
         for p in busq:
-
+    
             tmp=[p.id,p.nombre,p.apellido,p.cedula,p.telefono,p.tipo,p.direccion,p.sexo,p.correo,p.carrera,p.facultad]
             li = [p.nombre,p.apellido, p.cedula,p.telefono,p.tipo,p.direccion,p.sexo,p.correo,p.carrera,p.facultad]
             self.personales.append(tmp)
@@ -371,17 +369,16 @@ class PantallaPersonal(QtGui.QDialog, personal):
             self.cargarPersonal()
 
 		
-"""
+
 class PantallaSemillero(QtGui.QDialog, semillero):
     
     select = ''
     personal = Personal()
     nino = Nino()
     semillero = Semillero()
-<<<<<<< HEAD
+
     ninos = []
-=======
->>>>>>> b961b0cd1336c18ff2d8be191f5af5ea98dd1193
+
 
     def __init__(self,parent=None):
         QtGui.QDialog.__init__(self, parent)
@@ -389,13 +386,12 @@ class PantallaSemillero(QtGui.QDialog, semillero):
         self.inicializar()
        
     def inicializar(self):
-<<<<<<< HEAD
+
         #self.btn_ninos.setStyleSheet("background-color: transparent")
         #self.btn_ninos.setStyleSheet("border: 0px solid transparent")
-=======
+
         self.btn_ninos.setStyleSheet("background-color: transparent")
         self.btn_ninos.setStyleSheet("border: 0px solid transparent")
->>>>>>> b961b0cd1336c18ff2d8be191f5af5ea98dd1193
         self.btn_ninos.setIcon(QIcon('./Imagenes/personal_agregar.png'))
         self.btn_ninos.setIconSize(QSize(35,25))
 
@@ -410,12 +406,12 @@ class PantallaSemillero(QtGui.QDialog, semillero):
         #self.btn_ninos.setStyleSheet("border: 0px solid transparent")
         self.btn_ninos.setIcon(QIcon('./Imagenes/personal_agregar.png'))
         self.btn_ninos.setIconSize(QSize(35,25))
-<<<<<<< HEAD
+
         self.btn_ninos.clicked.connect(self.agregarNino)
         self.btn_guardar.clicked.connect(self.guardar)
-=======
-        self.btn_ninos.clicked.connect(self.irNino)
->>>>>>> b961b0cd1336c18ff2d8be191f5af5ea98dd1193
+
+        #self.btn_ninos.clicked.connect(self.irNino)
+
 		#self.btn_image.setStyleShett()
 		#self.btn_imagen.connect(self.irSearchFile)
 
@@ -431,7 +427,7 @@ class PantallaSemillero(QtGui.QDialog, semillero):
         for n in self.nino.consultar_todos():
               self.cmb_ninos.addItem(n.nombre,n.id)
     
-<<<<<<< HEAD
+
     def agregarNino(self):
         nino= PantallaNino()
         nino.exec_()
@@ -448,21 +444,20 @@ class PantallaSemillero(QtGui.QDialog, semillero):
         print n.nombre
         self.ninos.append(n)
         #self.actualizar()
-=======
+
     def irNino(self):
         nino= PantallaNino()
         nino.exec_()
->>>>>>> b961b0cd1336c18ff2d8be191f5af5ea98dd1193
-    
+
     def validarDatos(self):
-        try:
+        """try:
             if len(str(self.txt_tipo.text()))<1:
                 return False
         except:
-            return False
+            return False"""
         return True
 
-<<<<<<< HEAD
+
 
     def guardar(self):
         if not self.validarDatos():
@@ -486,8 +481,6 @@ class PantallaSemillero(QtGui.QDialog, semillero):
         self.txt_tipo.setText('')
         self.txt_imagen.setText('')
         self.txt_ubicacion.setText('')
-=======
->>>>>>> b961b0cd1336c18ff2d8be191f5af5ea98dd1193
 
     def guardar(self):
         if self.validarDatos():
@@ -502,13 +495,9 @@ class PantallaSemillero(QtGui.QDialog, semillero):
             self.semillero.guardar()
             #self.cargarPersonal()
             #self.limpiar()
-            QMessageBox.about(self,"Correcto","Cliente guardado con exito")
+            QMessageBox.about(self,"Correcto","Semillero guardado con exito")
     
-    def limpiar():
-        self.txt_tipo.setText('')
-        self.txt_imagen.setText('')
-        self.txt_ubicacion.setText('')
-"""
+    
 
 class PantallaNino(QtGui.QDialog, ninos):
     nino = Nino()
@@ -614,14 +603,9 @@ class PantallaJuego(QtGui.QDialog,juego):
         self.inicializar()
 
     def inicializar(self):
-<<<<<<< HEAD
          
         self.setStyleSheet(estilo)
-        self.btnLimpiar.clicked.connect(self.limpiar)
-        self.btnGuardar.clicked.connect(self.guardar)
-        #self.txtNombre.textChanged.connect(self.onlyTextName)
-    
-=======
+   
         self.ruta=''
         self.nombre_fichero=''
         self.juegos=[]
@@ -637,7 +621,6 @@ class PantallaJuego(QtGui.QDialog,juego):
 	#self.txtNombre.textChanged.connect(self.onlyTextName)
     	self.cargar()
 
->>>>>>> b961b0cd1336c18ff2d8be191f5af5ea98dd1193
     def validacion(self):
        
         if(self.txtNombre.text()=="" or self.txtArea.text()=="" or self.txtUbicacion.text()==""):
@@ -654,7 +637,7 @@ class PantallaJuego(QtGui.QDialog,juego):
             self.juego.area = str(self.txtArea.text())
             self.juego.ubicacion = str(self.txtUbicacion.text())
             self.juego.imagen = str(self.nombre_fichero)
-            self.juego.personal = str(1)
+            self.juego.personal.id = (self.cmbResponsable.itemData(self.cmbResponsable.currentIndex())).toInt()[0]
             self.juego.guardar()
             self.limpiar()
             QMessageBox.about(self,"Correcto","Juego guardado con exito")
@@ -718,7 +701,7 @@ class PantallaJuego(QtGui.QDialog,juego):
     
     def LlenarCombo(self):
         for p in self.personal.consultar_todos():
-            self.cmbResponsable.addItem(p.nombre)
+            self.cmbResponsable.addItem(p.nombre,p.id)
 
     def borrarTodo(self):
         try:
@@ -910,6 +893,7 @@ class PantallaOficio(QtGui.QDialog,oficio):
         else:
             self.cargar()
 """
+
 if __name__ == '__main__':
     app = QtGui.QApplication(sys.argv)
     log = Login()
