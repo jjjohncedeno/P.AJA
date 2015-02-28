@@ -595,11 +595,10 @@ class PantallaRepresentante(QtGui.QDialog, representante):
 
 class PantallaJuego(QtGui.QDialog,juego):
     juego=Juego()
-    
+    personal = Personal()
     def __init__(self,parent=None):
         QtGui.QDialog.__init__(self,parent)
         self.setupUi(self)
-        self.personal=Personal()
         self.inicializar()
 
     def inicializar(self):

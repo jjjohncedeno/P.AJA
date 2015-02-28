@@ -26,14 +26,15 @@ class Oficio(Objeto):
         cursor = conexion.cursor()
         cursor.execute(consulta, (str(self.id)))
         if cursor.fetchone() is None:
-            query = self.query_insert + '%s,%s,%s,%s,%s,%s,%s,%s ' + self.query_insert_end
-            cursor.execute(query,(str(self.contar()),self.Detalle,self.Destinatario,self.Estado ,self.Tramite , self.Respuesta, self.Observaciones, 1))
+            #query = self.query_insert + '%s,%s,%s,%s,%s,%s,%s,%s ' + self.query_insert_end
+            cursor.callproc('ingresoOficio',(self.contar(),self.Detalle,self.Destinatario,self.Estado ,self.Tramite , self.Respuesta, self.Observaciones, 1))
             conexion.commit()
             cursor.close()
-            print query
+            #print query
         else:
+            cursor.callproc('modificoOficio',(self.contar(),self.Detalle,self.Destinatario,self.Estado ,self.Tramite , self.Respuesta, self.Observaciones, 1))
             cursor.close()
-            self.modificar()
+            #self.modificar()
 
     def borrarOficios(self):
         self.eliminar_todo()  
@@ -41,13 +42,13 @@ class Oficio(Objeto):
     def borrarOficio(self):
         self.eliminar()
 
-    def modificar(self):
+    """def modificar(self):
         query = (self.query_update+ 'oficio_id = %s , oficio_detalle = %s, oficio_destinatario = %s, oficio_estado = %s, oficio_tramite = %s, oficio_respuesta = %s, oficio_observaciones = %s, oficio_IdPersonal = %s' + self.query_update_end)
         conexion = self.conexion.getConnection()
         cursor= conexion.cursor()
         cursor.execute(query,(self.Detalle,self.Destinatario,self.Estado ,self.Tramite , self.Respuesta, self.Observaciones,1))
         conexion.commit()
-        cursor.close()
+        cursor.close()"""
 
 
     def enlistar(self, listas):

@@ -22,21 +22,22 @@ class Juego(Objeto):
 
   
     def guardar(self):
-        id = str(self.contar())
-        print id
+        id = self.contar()
+        #print id
         consulta = 'SELECT * FROM Juego WHERE juego_id = %s;'
         conexion = self.conexion.getConnection()
         cursor= conexion.cursor()
         cursor.execute(consulta, (str(self.id)))
         if cursor.fetchone() is None:
-            query = self.query_insert + '%s,%s,%s,%s,%s,%s ' + self.query_insert_end
-            cursor.execute(query,(id,self.nombre,self.imagen,self.area,self.ubicacion,self.personal.id))
+            #query = self.query_insert + '%s,%s,%s,%s,%s,%s ' + self.query_insert_end
+            cursor.callproc('ingresoJuego',(id,self.nombre,self.imagen,self.area,self.ubicacion,self.personal.id))
             conexion.commit()
             cursor.close()
-            print query
+            #print query
         else:
+            cursor.callproc('modificoJuego',(id,self.nombre,self.imagen,self.area,self.ubicacion,self.personal.id))
             cursor.close()
-            self.modificar()
+            #self.modificar()
 
     def borrarJuegos(self):
         self.eliminar_todo()  
@@ -44,13 +45,13 @@ class Juego(Objeto):
     def borrarJuego(self):
         self.eliminar()
 
-    def modificar(self):
+    """def modificar(self):
         query = (self.query_update+ 'juego_nombre=%s, juego_imagen= %s,juego_area= %s ,juego_ubicacion = %s, juego_IdPersonal = %s' + self.query_update_end)
         conexion = self.conexion.getConnection()
         cursor= conexion.cursor()
         cursor.execute(query,(self.nombre,self.imagen,self.area,self.ubicacion,self.personal.id,self.id))
         conexion.commit()
-        cursor.close()
+        cursor.close()"""
 
 
     def enlistar(self, listas):

@@ -32,15 +32,17 @@ class Personal(Objeto):
     cursor= conexion.cursor()
     cursor.execute(consulta, (str(self.id),))
     if cursor.fetchone() is None:
-      query = self.query_insert + ' %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s '+self.query_insert_end
-      cursor.execute(query,(str(self.contar()),self.nombre,self.apellido,self.cedula,self.telefono,self.tipo,self.direccion,self.sexo,self.correo,self.carrera,self.facultad))
-      
+      #query = self.query_insert + ' %s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s '+self.query_insert_end
+      #cursor.execute(query,(str(self.contar()),self.nombre,self.apellido,self.cedula,self.telefono,self.tipo,self.direccion,self.sexo,self.correo,self.carrera,self.facultad))
+      cursor.callproc('ingresoPersonal',(self.contar(),self.nombre,self.apellido,self.cedula,self.telefono,self.tipo,self.direccion,self.sexo,self.correo,self.carrera,self.facultad))
+
       conexion.commit()
       cursor.close()
-      print query
+      #print query
     else:
+      cursor.callproc('modificoPersonal',(self.contar(),self.nombre,self.apellido,self.cedula,self.telefono,self.tipo,self.direccion,self.sexo,self.correo,self.carrera,self.facultad))
       cursor.close()
-      self.modificar()
+      #self.modificar()
 
   def borrarPersonales(self):
     self.eliminar_todo()  
@@ -48,14 +50,14 @@ class Personal(Objeto):
   def borrarPersonal(self):
     self.eliminar()
 
-  def modificar(self):
+  """def modificar(self):
     query = (self.query_update+ 'personal_nombre= %s, personal_apellido= %s,personal_cedula= %s ,personal_telefono = %s,personal_tipo=%s, personal_direccion = %s,personal_sexo = %s,personal_correo = %s,personal_carrera = %s,personal_facultad = %s' + self.query_update_end)
     conexion = self.conexion.getConnection()
     cursor= conexion.cursor()
     cursor.execute(query,(self.nombre,self.apellido,self.cedula,self.telefono,self.tipo,self.direccion,self.sexo,self.correo,self.carrera,self.facultad,self.id))
     conexion.commit()
     cursor.close()
-
+  """
 
   def enlistar(self, listas):
     lista=[]
