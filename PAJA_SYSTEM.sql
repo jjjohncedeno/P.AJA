@@ -93,8 +93,10 @@ CREATE TABLE `Oficio` (
   `oficio_tramite` varchar(45) DEFAULT NULL,
   `oficio_respuesta` varchar(45) DEFAULT NULL,
   `oficio_observaciones` varchar(45) DEFAULT NULL,
-  `oficio_IdPersonal` varchar(45) DEFAULT NULL,
-  PRIMARY KEY (`oficio_id`)
+  `oficio_IdPersonal` int(11) NOT NULL,
+  PRIMARY KEY (`oficio_id`),
+  KEY `oficio_IdPersonal` (`oficio_IdPersonal`),
+  CONSTRAINT `fk_Oficio_1` FOREIGN KEY (`oficio_IdPersonal`) REFERENCES `Personal` (`personal_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -104,7 +106,6 @@ CREATE TABLE `Oficio` (
 
 LOCK TABLES `Oficio` WRITE;
 /*!40000 ALTER TABLE `Oficio` DISABLE KEYS */;
-INSERT INTO `Oficio` VALUES (1,'Prestamo','Ing Branny','Recibido','123','No quiero','No tengo billete','1'),(2,'Mas errores de internet','Ing. Julio','Recibido','12','No se','No he estudiado','1'),(3,'La prueba final','John','Recibido','123','No se que es','Puede que no haya ','1'),(4,'Eliminacion de materia','Rector','Recibido','1234','No se que mas','Cualquier nota','1'),(5,'nuvo ingreso','presidente','Recibido','233','pendiente','niguna','1'),(6,'ingreso de tramites ','preidencia','Recibido','2345','pendinte','ninguna','1'),(7,'proximas compras','alcaldia','Recibido','345','pendiente','niguna','1'),(8,'nuevo oficio','rectorado','Recibido','456','pendiente','niguna','1'),(9,'nuevo','rectoado','Recibido','67','nada','pendente','1'),(10,'destidno','retorado','Recibido','456','ninguna','penditne','1'),(11,'aaa','aaa','Recibido','aaa','aaa','aaaa','1');
 /*!40000 ALTER TABLE `Oficio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -389,4 +390,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-02-28 13:30:07
+-- Dump completed on 2015-02-28 14:30:12

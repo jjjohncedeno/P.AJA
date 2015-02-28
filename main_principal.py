@@ -765,6 +765,7 @@ class PantallaOficio(QtGui.QDialog,oficio):
         self.btnEliminar.clicked.connect(self.borrarTodo)
         self.tbaOficio.doubleClicked.connect(self.elegir_dobleclick)
         #self.btnBuscar.clicked.connect(self.buscar)
+        self.LlenarCombo()
         self.tbaOficioEliminar.doubleClicked.connect(self.borrarSelec)        
 	#self.txtNombre.textChanged.connect(self.onlyTextName)
         self.cargar()
@@ -787,7 +788,7 @@ class PantallaOficio(QtGui.QDialog,oficio):
             self.oficio.Tramite = str(self.txtTramite.text())
             self.oficio.Respuesta = str(self.txtRespuesta.text())
             self.oficio.Observaciones = str(self.txtObservaciones.text())
-            self.oficio.personal = str(1)
+            self.oficio.personal.id = (self.cmbResponsable.itemData(self.cmbResponsable.currentIndex())).toInt()[0]
             self.oficio.guardar()
             self.limpiar()
             QMessageBox.about(self,"Correcto","Oficio guardado con exito")
@@ -845,7 +846,7 @@ class PantallaOficio(QtGui.QDialog,oficio):
     
     def LlenarCombo(self):
         for p in self.personal.consultar_todos():
-            self.cmbResponsable.addItem(p.nombre)
+            self.cmbResponsable.addItem(p.nombre,p.id)
 
     def borrarTodo(self):
         try:

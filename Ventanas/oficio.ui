@@ -175,7 +175,7 @@
     <widget class="QPushButton" name="btnGuardar">
      <property name="geometry">
       <rect>
-       <x>330</x>
+       <x>350</x>
        <y>350</y>
        <width>111</width>
        <height>31</height>
@@ -193,7 +193,7 @@
     <widget class="QPushButton" name="btnLimpiar">
      <property name="geometry">
       <rect>
-       <x>120</x>
+       <x>180</x>
        <y>350</y>
        <width>111</width>
        <height>31</height>
@@ -242,6 +242,21 @@
         </property>
         <property name="text">
          <string>Destinatario</string>
+        </property>
+        <property name="alignment">
+         <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLabel" name="label_17">
+        <property name="font">
+         <font>
+          <pointsize>12</pointsize>
+         </font>
+        </property>
+        <property name="text">
+         <string>Remitente</string>
         </property>
         <property name="alignment">
          <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
@@ -334,6 +349,9 @@
       </item>
       <item>
        <widget class="QLineEdit" name="txtDestinatario"/>
+      </item>
+      <item>
+       <widget class="QComboBox" name="cmbResponsable"/>
       </item>
       <item>
        <widget class="QComboBox" name="cmbEstado">

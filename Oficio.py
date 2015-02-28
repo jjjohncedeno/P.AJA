@@ -1,5 +1,6 @@
 from Conexion import *
 from objeto import * 
+from Personal import *
 class Oficio(Objeto):
     Detalle = ''
     Destinatario = ''
@@ -7,7 +8,7 @@ class Oficio(Objeto):
     Tramite = ''
     Respuesta = ''
     Observaciones = ''
-    personal=''
+    personal=Personal()
     headernames = ['Detalle','Destinatario','Estado','Tramite','Respuesta', 'Observaciones']
     atributos = 'oficio_id, oficio_detalle, oficio_destinatario, oficio_estado, oficio_tramite, oficio_respuesta, oficio_observaciones, oficio_IdPersonal'
     tabla = 'oficio'
@@ -27,12 +28,12 @@ class Oficio(Objeto):
         cursor.execute(consulta, (str(self.id)))
         if cursor.fetchone() is None:
             #query = self.query_insert + '%s,%s,%s,%s,%s,%s,%s,%s ' + self.query_insert_end
-            cursor.callproc('ingresoOficio',(self.contar(),self.Detalle,self.Destinatario,self.Estado ,self.Tramite , self.Respuesta, self.Observaciones, 1))
+            cursor.callproc('ingresoOficio',(self.contar(),self.Detalle,self.Destinatario,self.Estado ,self.Tramite , self.Respuesta, self.Observaciones, self.personal.id))
             conexion.commit()
             cursor.close()
             #print query
         else:
-            cursor.callproc('modificoOficio',(self.contar(),self.Detalle,self.Destinatario,self.Estado ,self.Tramite , self.Respuesta, self.Observaciones, 1))
+            cursor.callproc('modificoOficio',(self.contar(),self.Detalle,self.Destinatario,self.Estado ,self.Tramite , self.Respuesta, self.Observaciones, self.personal.id))
             cursor.close()
             #self.modificar()
 
@@ -67,4 +68,4 @@ class Oficio(Objeto):
         self.Tramite = datarow[4]
         self.Respuesta = datarow[5]
         self.Observaciones = datarow[6]
-        self.personal = datarow[7]  
+        self.personal.id = datarow[7]  
