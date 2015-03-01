@@ -2,7 +2,7 @@ from Conexion import *
 from objeto import *
 from Personal import *
 
-class Ventas():
+class Ventas(Objeto):
     personal = Personal()
     Detalle = ''
     Fecha = ''
@@ -28,7 +28,7 @@ class Ventas():
         cursor= conexion.cursor()
         cursor.callproc('selectId', ("Venta",int(self.id)))
         if cursor.fetchone() is None:
-            cursor.callproc("ingresoVenta",(self.contar(), self.Detalle,self.Fecha,int(self.Costo),int(self.Cantidad), int(self.Total), int(self.personal.id), self.Observaciones))
+            cursor.callproc("ingresoVenta",(self.contar(), self.Detalle,self.Fecha,float(self.Costo),int(self.Cantidad), float(self.Total), int(self.personal.id), self.Observaciones))
             conexion.commit()
             cursor.close()
         else:
@@ -44,7 +44,7 @@ class Ventas():
     def modificar(self):
         conexion = self.conexion.getConnection()
         cursor= conexion.cursor()
-        cursor.callproc('modificoCompra',(int(self.id),  self.Detalle,self.Fecha,int(self.Costo),int(self.Cantidad), int(self.Total), int(self.personal.id), self.Observaciones))
+        cursor.callproc('modificoCompra',(int(self.id),  self.Detalle,self.Fecha,float(self.Costo),int(self.Cantidad), float(self.Total), int(self.personal.id), self.Observaciones))
         conexion.commit()
         cursor.close()
 

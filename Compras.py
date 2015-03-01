@@ -2,7 +2,7 @@ from Conexion import *
 from objeto import *
 from Personal import *
 
-class Compras():
+class Compras(Objeto):
     personal = Personal()
     Detalle = ''
     Fecha = ''

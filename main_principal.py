@@ -32,7 +32,7 @@ juego=uic.loadUiType('./Ventanas/juego.ui')[0]
 contabilidad = uic.loadUiType('./Ventanas/contabilidad.ui')[0]
 ventas = uic.loadUiType('./Ventanas/Venta.ui')[0]
 compras = uic.loadUiType('./Ventanas/compras.ui')[0]
-
+resultados = uic.loadUiType('./Ventanas/resultados.ui')[0]
 class Login(QtGui.QDialog, login):
     #conexion = Conexion()
     def __init__(self,parent=None):
@@ -112,7 +112,7 @@ class Principal(QtGui.QMainWindow, ptaPrincipal):
         self.btnContabilidad.clicked.connect(self.irContabilidad)
         self.btnJuego.clicked.connect(self.irJuego)
         self.btnOficio.clicked.connect(self.irOficio)
-        self.btnContabilidad.connect(self.irContabilidad)
+        self.btnContabilidad.clicked.connect(self.irContabilidad)
 
     def irPersonal(self):
         personal=PantallaPersonal()
@@ -295,7 +295,7 @@ class PantallaPersonal(QtGui.QDialog, personal):
         
         for p in busq:
     
-            tmp=[p.id,p.nombre,p.apellido,p.cedula,p.telefono,p.tipo,p.direccion,p.sexo,p.correo,p.carrera,p.facultad]
+            tmp= [p.id,p.nombre,p.apellido,p.cedula,p.telefono,p.tipo,p.direccion,p.sexo,p.correo,p.carrera,p.facultad]
             li = [p.nombre,p.apellido, p.cedula,p.telefono,p.tipo,p.direccion,p.sexo,p.correo,p.carrera,p.facultad]
             self.personales.append(tmp)
             row = []
@@ -558,9 +558,6 @@ class PantallaNino(QtGui.QDialog, ninos):
         #self.txt_esAlergico.setText('')
         self.txt_observacion.setText('')
 
-
-
-
 class PantallaRepresentante(QtGui.QDialog, representante):
     
     repre = Representante()
@@ -763,7 +760,8 @@ class PantallaContabilidad(QtGui.QDialog,contabilidad):
         self.btnCompras.clicked.connect(self.Compras)
         self.btnVentas.clicked.connect(self.Ventas)
         self.btnResultados.clicked.connect(self.Resultados)
-    
+        self.setStyleSheet(estilo)
+ 
     def Compras(self):
         compras = PantallaCompras()
         compras.exec_()    
@@ -778,6 +776,8 @@ class PantallaContabilidad(QtGui.QDialog,contabilidad):
 
 class PantallaVentas(QtGui.QDialog,ventas):
     venta = Ventas()
+    tmpCantidad = ""
+    tmpCosto = ""
     def __init__(self,parent=None):
         QtGui.QDialog.__init__(self,parent)
         self.setupUi(self)
@@ -788,16 +788,61 @@ class PantallaVentas(QtGui.QDialog,ventas):
         for p in self.personal.consultar_todos():
             self.cmbResponsable.addItem(p.nombre,p.id)
 
-    def inicializar():
+    def inicializar(self):
         ventas=[]
-        self.llenarCombo()
+        self.txtTotal.setText('0')
+        self.LlenarCombo()
         self.setStyleSheet(estilo)
         self.btnGuardar.clicked.connect(self.guardar)
         self.btnLimpiar.clicked.connect(self.limpiar)
         self.btnEliminar.clicked.connect(self.borrarTodo)
-        self.tbaVentas.doubleClicked.connect(self.elegir_doubleclick)
+        self.tbaVenta.doubleClicked.connect(self.elegir_dobleclick)
         self.tbaVentaEliminar.doubleClicked.connect(self.borrarSelec)
+        self.txtCosto.textChanged.connect(lambda: self.onlyDigit('costo,' + self.txtCosto.text()))
+        self.txtCantidad.textChanged.connect(lambda: self.onlyDigit('cantidad,'+ self.txtCantidad.text())) 
         self.cargar()
+ 
+    def onlyDigit(self,texto):
+        try:
+            number = str(texto.split(',')[1])
+            name = str(texto.split(',')[0])
+
+            if number != '':
+                if not ((number.replace(' ','')).isdigit() and (number.replace('.','')).isdigit()) :
+                    QMessageBox.about(self,"ERROR","Ingresar solo digitos")
+                    if name == 'cantidad':
+                        self.txtCantidad.setText(self.tmpCantidad)
+                    elif name == 'costo':
+                        self.txtCosto.setText(self.tmpCosto)
+
+                else:
+                    if len(number) == 1:
+                        self.tmpCantidad = ''
+                        self.tmpCosto = ''
+                    else:
+                        if name == 'cantidad':
+                            self.tmpCantidad = number
+                        elif name == 'costo':
+                            self.tmpCosto = number
+		
+        except:
+            name = str(texto.split(',')[0])
+            QMessageBox.about(self,"ERROR","Ingresar solo digitos")
+											
+            if name == 'cantidad':
+                self.tmpCantidad=''
+                self.txtCantidad.setText('')
+            elif name == 'costo':
+                self.tmpCosto=''
+                self.txtCosto.setText('')
+
+        if self.txtCosto.text()=='' or self.txtCantidad.text()=='':
+            self.txtTotal.setText('0')
+        else:
+            costo = float(self.txtCosto.text())
+            cantidad = int(self.txtCantidad.text())
+            total = costo*cantidad
+            self.txtTotal.setText(str(total)) 
 
     def validacion(self):
        
@@ -812,7 +857,8 @@ class PantallaVentas(QtGui.QDialog,ventas):
            
         else:
             self.venta.Detalle = str(self.txtDetalle.text())
-            self.venta.Costo = str(self.txtCossto.text())
+            self.venta.Costo = str(self.txtCosto.text())
+            self.venta.Cantidad = str(self.txtCantidad.txt())
             self.venta.Fecha = str(self.txtFecha.text())
             self.venta.Total = str(self.txtTotal.text())
             self.juego.personal.id = (self.cmbResponsable.itemData(self.cmbResponsable.currentIndex())).toInt()[0]
@@ -913,13 +959,18 @@ class PantallaVentas(QtGui.QDialog,ventas):
             self.cargar()
 
 
-class PantallaResultado(QtGui.QDialog,compras):
+class PantallaResultados(QtGui.QDialog,resultados):
     def __init__(self,parent=None):
         QtGui.QDialog.__init__(self,parent)
         self.setupUi(self)
+        self.inicializar()
+
+    def inicializar(self):
+        self.setStyleSheet(estilo)
 
 class PantallaCompras(QtGui.QDialog,compras):
     compra = Compras()
+    tmpGasto = ''
     def __init__(self,parent=None):
         QtGui.QDialog.__init__(self,parent)
         self.setupUi(self)
@@ -930,16 +981,43 @@ class PantallaCompras(QtGui.QDialog,compras):
         for p in self.personal.consultar_todos():
             self.cmbResponsable.addItem(p.nombre,p.id)
 
-    def inicializar():
+    def inicializar(self):
         ventas=[]
-        self.llenarCombo()
+        self.LlenarCombo()
         self.setStyleSheet(estilo)
         self.btnGuardar.clicked.connect(self.guardar)
         self.btnLimpiar.clicked.connect(self.limpiar)
         self.btnEliminar.clicked.connect(self.borrarTodo)
-        self.tbaCompras.doubleClicked.connect(self.elegir_doubleclick)
-        self.tbaCompraEliminar.doubleClicked.connect(self.borrarSelec)
+        self.tbaCompras.doubleClicked.connect(self.elegir_dobleclick)
+        self.txtGasto.textChanged.connect(lambda: self.onlyDigit('gasto,'+ self.txtGasto.text()))
+        self.tbaComprasEliminar.doubleClicked.connect(self.borrarSelec)
         self.cargar()
+
+    def onlyDigit(self,texto):
+        try:
+            number = str(texto.split(',')[1])
+            name = str(texto.split(',')[0])
+
+            if number != '':
+                if not ((number.replace(' ','')).isdigit() and (number.replace('.','')).isdigit()) :
+                    QMessageBox.about(self,"ERROR","Ingresar solo digitos")
+                    if name == 'gasto':
+                        self.txtGasto.setText(self.tmpGasto)
+                else:
+                    if len(number) == 1:
+                        self.tmpGasto = ''
+
+                    else:
+                        if name == 'gasto':
+                            self.tmpGasto = number
+	
+        except:
+            name = str(texto.split(',')[0])
+            QMessageBox.about(self,"ERROR","Ingresar solo digitos")
+											
+            if name == 'gasto':
+                self.tmpGasto=''
+                self.txtGasto.setText('')
 
     def validacion(self):
        
@@ -975,7 +1053,7 @@ class PantallaCompras(QtGui.QDialog,compras):
     def cargar(self, atribute=None, name=None):
         model = QStandardItemModel()
         model.setColumnCount(7)
-        model.setHorizontalHeaderLabels(self.venta.headernames)
+        model.setHorizontalHeaderLabels(self.compra.headernames)
         busq1 = []
         self.compras=[]
         if (atribute is not None) and (name is not None):
@@ -1001,7 +1079,7 @@ class PantallaCompras(QtGui.QDialog,compras):
         self.tbaComprasEliminar.setModel(model)
 
     def elegir_dobleclick(self):
-        selected = self.tbaCompra.selectedIndexes()
+        selected = self.tbaCompras.selectedIndexes()
         selected_index = selected.__getitem__(0)
         select = self.compras[selected_index.row()]
         self.tabWidget.setCurrentWidget(self.tab_1)

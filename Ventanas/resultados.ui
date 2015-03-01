@@ -73,48 +73,6 @@
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="lblventas">
-   <property name="geometry">
-    <rect>
-     <x>190</x>
-     <y>90</y>
-     <width>119</width>
-     <height>33</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-   </property>
-  </widget>
-  <widget class="QLabel" name="lblcompras">
-   <property name="geometry">
-    <rect>
-     <x>190</x>
-     <y>140</y>
-     <width>119</width>
-     <height>33</height>
-    </rect>
-   </property>
-   <property name="font">
-    <font>
-     <pointsize>12</pointsize>
-    </font>
-   </property>
-   <property name="text">
-    <string/>
-   </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
-   </property>
-  </widget>
   <widget class="QLabel" name="label_27">
    <property name="geometry">
     <rect>
@@ -136,25 +94,61 @@
     <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
    </property>
   </widget>
-  <widget class="QLabel" name="lbltotal">
+  <widget class="QLineEdit" name="txtVenta">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="geometry">
     <rect>
-     <x>160</x>
-     <y>230</y>
-     <width>119</width>
-     <height>33</height>
+     <x>200</x>
+     <y>90</y>
+     <width>113</width>
+     <height>31</height>
     </rect>
    </property>
    <property name="font">
     <font>
-     <pointsize>12</pointsize>
+     <weight>75</weight>
+     <bold>true</bold>
     </font>
    </property>
-   <property name="text">
-    <string/>
+  </widget>
+  <widget class="QLineEdit" name="txtCompra">
+   <property name="enabled">
+    <bool>false</bool>
    </property>
-   <property name="alignment">
-    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignVCenter</set>
+   <property name="geometry">
+    <rect>
+     <x>200</x>
+     <y>140</y>
+     <width>113</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
+   </property>
+  </widget>
+  <widget class="QLineEdit" name="txtTotal">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>230</y>
+     <width>113</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="font">
+    <font>
+     <weight>75</weight>
+     <bold>true</bold>
+    </font>
    </property>
   </widget>
  </widget>

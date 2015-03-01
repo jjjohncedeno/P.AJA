@@ -52,6 +52,19 @@
     <string>Resultados</string>
    </property>
   </widget>
+  <widget class="QLabel" name="label">
+   <property name="geometry">
+    <rect>
+     <x>60</x>
+     <y>30</y>
+     <width>161</width>
+     <height>71</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>CONTROL CONTABLE</string>
+   </property>
+  </widget>
  </widget>
  <resources/>
  <connections/>
