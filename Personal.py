@@ -1,5 +1,6 @@
 from Conexion import *
 from objeto import * 
+
 class Personal(Objeto):
   nombre = ''
   apellido = ''

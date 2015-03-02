@@ -28,7 +28,6 @@ CREATE TABLE `Compra` (
   `compra_id` int(11) NOT NULL,
   `compra_detalle` varchar(50) NOT NULL,
   `compra_fecha` date NOT NULL,
-  `compra_tipo` varchar(20) NOT NULL,
   `compra_gasto` decimal(10,2) NOT NULL,
   `compra_IdPersonal` int(11) NOT NULL,
   `compra_observaciones` varchar(300) DEFAULT NULL,
@@ -73,7 +72,7 @@ CREATE TABLE `Juego` (
 
 LOCK TABLES `Juego` WRITE;
 /*!40000 ALTER TABLE `Juego` DISABLE KEYS */;
-INSERT INTO `Juego` VALUES (3,'Asertijos','/home/julio/Escritorio/BaseDatosProject/Proyecto/Imagenes/search.png','Creatividad','Oficina',6),(4,'El teto','/home/julio/Escritorio/BaseDatosProject/Proyecto/Imagenes/personal_Image.jpeg','Psicologia','Plazoneta',6),(5,'figuras locas','/home/julio/Escritorio/BaseDatosProject/Proyecto/Imagenes/personal_agregar.png','Matematicas','Cuarto 3',8),(6,'Crucigramas','/home/julio/Escritorio/BaseDatosProject/Proyecto/Imagenes/solo_cruz.png','Distraccion','Salon interno',7),(7,'Historia ','/home/julio/Escritorio/BaseDatosProject/Proyecto/Imagenes/personal_agregar.png','Historia','Mesa central',5),(8,'El barco','/home/julio/Escritorio/BaseDatosProject/Proyecto/Imagenes/search.png','Juegos','Fuera',1),(9,'Elefantito','/home/julio/Escritorio/BaseDatosProject/Proyecto/Imagenes/personal_agregar.png','Distraccion','Interna',8),(10,'adivinanzas','/home/julio/Escritorio/BaseDatosProject/Proyecto/Imagenes/personal_Image.jpeg','Lenguaje','Cuarto',1),(11,'Arbol de letras','/home/julio/Escritorio/BaseDatosProject/Proyecto/Imagenes/search.png','Aprender','Salon',10),(12,'La macarena','/home/julio/Escritorio/BaseDatosProject/Proyecto/Imagenes/personal_Image.jpeg','Baile','Salon de baile',9),(13,'Gravedad 10','/home/julio/Escritorio/BaseDatosProject/Proyecto/Imagenes/search.png','holi','espol',1),(14,'Jueguito','/home/julio/Escritorio/BaseDatosProject/Proyecto/Imagenes/personal_agregar.png','area 51','por ahi',8),(15,'La Bamba','/home/julio/Escritorio/imagenes FB/gatoOjos.jpg','hola','atras',1),(16,'Rompecabezas','/home/julio/Escritorio/imagenes FB/rompecabezas.jpg','area 50','Espol',3),(17,'Ajedrez','/home/julio/Escritorio/imagenes FB/Ajedrez.jpg','Logica','Area de Juegos',4),(18,'Sudoku','/home/julio/Escritorio/imagenes FB/sudoku.jpg','Inteligencia','Area de Juegos',4),(19,'Bola Magica','/home/julio/Escritorio/imagenes FB/bola.jpg','Juegos','Patio exterior',8),(20,'Antena comunica','/home/julio/Escritorio/imagenes FB/antena.jpg','Juegos','Patio exterior',4),(21,'Adivinanzas','/home/julio/Escritorio/imagenes FB/adivinanzas.jpg','Logica','Sala de Juegos',1),(22,'Juegos De logic','/home/julio/Escritorio/imagenes FB/juegos.jpg','Logica','Salon de Juegos',1);
+INSERT INTO `Juego` VALUES (3,'Asertijos','/home/julio/Escritorio/BaseDatosProject/Proyecto/Imagenes/search.png','Creatividad','Oficina',6),(4,'El teto','/home/julio/Escritorio/BaseDatosProject/Proyecto/Imagenes/personal_Image.jpeg','Psicologia','Plazoneta',6),(5,'figuras locas','/home/julio/Escritorio/BaseDatosProject/Proyecto/Imagenes/personal_agregar.png','Matematicas','Cuarto 3',8),(6,'Crucigramas','/home/julio/Escritorio/BaseDatosProject/Proyecto/Imagenes/solo_cruz.png','Distraccion','Salon interno',7),(7,'Historia ','/home/julio/Escritorio/BaseDatosProject/Proyecto/Imagenes/personal_agregar.png','Historia','Mesa central',5),(8,'El barco','/home/julio/Escritorio/BaseDatosProject/Proyecto/Imagenes/search.png','Juegos','Fuera',1),(9,'Elefantito','/home/julio/Escritorio/BaseDatosProject/Proyecto/Imagenes/personal_agregar.png','Distraccion','Interna',8),(10,'adivinanzas','/home/julio/Escritorio/BaseDatosProject/Proyecto/Imagenes/personal_Image.jpeg','Lenguaje','Cuarto',1),(11,'Arbol de letras','/home/julio/Escritorio/BaseDatosProject/Proyecto/Imagenes/search.png','Aprender','Salon',10),(12,'La macarena','/home/julio/Escritorio/BaseDatosProject/Proyecto/Imagenes/personal_Image.jpeg','Baile','Salon de baile',9),(13,'Gravedad 10','/home/julio/Escritorio/BaseDatosProject/Proyecto/Imagenes/search.png','holi','espol',1),(14,'Jueguito','/home/julio/Escritorio/BaseDatosProject/Proyecto/Imagenes/personal_agregar.png','area 51','por ahi',8),(15,'La Bamba','/home/julio/Escritorio/imagenes FB/gatoOjos.jpg','hola','atras',1);
 /*!40000 ALTER TABLE `Juego` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -136,7 +135,7 @@ CREATE TABLE `Oficio` (
 
 LOCK TABLES `Oficio` WRITE;
 /*!40000 ALTER TABLE `Oficio` DISABLE KEYS */;
-INSERT INTO `Oficio` VALUES (1,'hola','xhao','Recibido','909','kjk','jkj',1),(2,'Dinero para mantenimiento de juegos','Ing Julito','Recibido','no','Listo','Se les dara lo que pidan',4),(3,'Mantenimiento de Local','Ing Jessica','En proceso','Cancelado','Listo','No se puede',3),(4,'Mas juegos','Ing John','Recibido','Cancelado','Listo','no es posible',4),(5,'Mas juegos','Ing John','Recibido','Cancelado','Listo','no es posible',5),(6,'Mas juegos','Ing John','Recibido','Cancelado','Listo','no es posible',8),(7,'No se','Ing John','Recibido','Cancelado','Listo','Si',6),(8,'Oficios','Ing Tereza','Recibido','Cancelado','Listo','no',7),(9,'Mas juegos','Ing John','Recibido','Cancelado','Listo','alguna cosa',7),(10,'otro oficio','Ing Mili','Recibido','Cancelado','Falto','cuando no',9),(11,'Dinero para mantenimiento de juegos','Ing Julito','Recibido','no','Listo','Se les dara lo que pidan',2),(12,'juegos','Ing Julito','Recibido','no','Listo','Se les dara lo que pidan',1),(13,'Mantenimiento de juegos','Ing John','Recibido','no','Lo que sea','Se les dara lo que pidan',8),(14,'Juegos','Ing Julio','Recibido','no','Listo','Cuando sea',1),(15,'Revicion de Juegos','Rector','Recibido','no','Listo','Acepto la revision',3),(16,'Visita tecnica','Ing Bolwsan','Recibido','no','Talvez','Cuando sea',1),(17,'Revicion de Juegos','Rector','Recibido','no','Listo','Acepto la revision',3),(18,'Visita tecnica','Ing Bolwsan','Recibido','no','Talvez','Cuando sea',1),(19,'Revicion de Juegos','Rector','Recibido','no','Listo','Acepto la revision',8),(20,'Visita tecnica','Ing Bolwsan','Recibido','no','Talvez','Cuando sea',2);
+INSERT INTO `Oficio` VALUES (1,'hola','xhao','Recibido','909','kjk','jkj',1);
 /*!40000 ALTER TABLE `Oficio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -169,7 +168,7 @@ CREATE TABLE `Personal` (
 
 LOCK TABLES `Personal` WRITE;
 /*!40000 ALTER TABLE `Personal` DISABLE KEYS */;
-INSERT INTO `Personal` VALUES (1,'julio','realpe',49,494,'Ayudante','fjkf','Masculino','j@gmail.com','fj','jk'),(2,'Teresa','Echeverria',912345678,991837635,'Profesor','Calle Salinas','Masculino','teche@gmail.com','Ing. Marketing','FEN'),(3,'john','Cedeno',916718283,2147483647,'Personal Contratado','Mapasingue ','Masculino','jjj@gmail.com','ing. Computacion','FIEC'),(4,'Juan','Vaca',987654321,2147483647,'Voluntario','Sauces','Masculino','jjvaca@gmail.com','Ing. Computacion','FIEC'),(5,'David','Pazmino',987678768,2147483647,'Profesor','Sur','Masculino','david@gmail.com','Ing. Potencia','FIEC'),(6,'Sheila','Gallegos',987676578,987654536,'Ayudante','Duran','Femenino','shei@yahoo.com','Ing. ELectrica','FIEC'),(7,'Katty Mary','Hermenejildo de Cedeno',989878767,987678765,'Profesor','Salinas','Femenino','lachiquita@hotmail.com','Diseno Grafico','EDCOM'),(8,'Gonzalo','Iturburu',1001234567,987567485,'Personal Contratado','ALborada','Masculino','wachitoto@gmail.com','Ing. Alimentos','FICT'),(9,'Carlo','Lecaro',989543426,972635463,'Voluntario','Sur Portete','Masculino','muerte666@gmail.com','Ing. Electronica','FIEC'),(10,'Israel','Fernandez',1002345869,2147483647,'Profesor','Manabi','Masculino','is94@hotmail.com','Ing. Mecatronica','FIMCP'),(11,'Alejandro','Espana',99889,887,'Ayudante','durn','Masculino','r@hotmail.com','fisica','fisica'),(12,'Chucha ','que si guarda ',98,123,'Ayudante','bien!!','Masculino','l@gmail.com','Ing. Potencia','FIEC'),(13,'Maria','Cedeno',98,123,'Ayudante','bien!!','Femenino','majo@gmail.com','Ing. Potencia','FIEC'),(14,'Guido','Proano',98,123,'Profesor','bien!!','Masculino','tripa@gmail.com','Ing. Potencia','FIEC'),(15,'Jorge','Rodriguez',98,123,'Profesor','bien!!','Masculino','jor@gmail.com','Ing. Potencia','FIEC'),(16,'Vaquita','Chiquita',98,123,'Profesor','bien!!','Femenino','vc@gmail.com','Ing. en Alimmentos','FIMCT'),(17,'Hector','Cedeno',98,123,'Profesor','bien!!','Masculino','hce@gmail.com','Ing. Potencia','FIEC'),(18,'Dodiz','Rodriguez',98,123,'Ayudante','bien!!','Masculino','dr@gmail.com','Ing. Computacion','FIEC'),(19,'Pez','Fernandez',98,123,'Voluntario','bien!!','Masculino','pez@gmail.com','Ing. Sexologia','FIEC'),(20,'Katherine','Lomas',98,123,'Ayudante','bien!!','Femenino','kl@gmail.com','Ing. Alimentos','FIMCT');
+INSERT INTO `Personal` VALUES (1,'julio','realpe',49,494,'Ayudante','fjkf','Masculino','j@gmail.com','fj','jk'),(2,'Teresa','Echeverria',912345678,991837635,'Profesor','Calle Salinas','Masculino','teche@gmail.com','Ing. Marketing','FEN'),(3,'john','Cedeno',916718283,2147483647,'Personal Contratado','Mapasingue ','Masculino','jjj@gmail.com','ing. Computacion','FIEC'),(4,'Juan','Vaca',987654321,2147483647,'Voluntario','Sauces','Masculino','jjvaca@gmail.com','Ing. Computacion','FIEC'),(5,'David','Pazmino',987678768,2147483647,'Profesor','Sur','Masculino','david@gmail.com','Ing. Potencia','FIEC'),(6,'Sheila','Gallegos',987676578,987654536,'Ayudante','Duran','Femenino','shei@yahoo.com','Ing. ELectrica','FIEC'),(7,'Katty Mary','Hermenejildo de Cedeno',989878767,987678765,'Profesor','Salinas','Femenino','lachiquita@hotmail.com','Diseno Grafico','EDCOM'),(8,'Gonzalo','Iturburu',1001234567,987567485,'Personal Contratado','ALborada','Masculino','wachitoto@gmail.com','Ing. Alimentos','FICT'),(9,'Carlo','Lecaro',989543426,972635463,'Voluntario','Sur Portete','Masculino','muerte666@gmail.com','Ing. Electronica','FIEC'),(10,'Israel','Fernandez',1002345869,2147483647,'Profesor','Manabi','Masculino','is94@hotmail.com','Ing. Mecatronica','FIMCP');
 /*!40000 ALTER TABLE `Personal` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -226,7 +225,7 @@ CREATE TABLE `Representante` (
 
 LOCK TABLES `Representante` WRITE;
 /*!40000 ALTER TABLE `Representante` DISABLE KEYS */;
-INSERT INTO `Representante` VALUES (1,'ju','re',94,2234,'SI'),(2,'Toto','Fienco',928837394,982722342,'SI'),(3,'John','Cedeno',923456456,943234567,'NO'),(4,'Melania','Cuenca',922345654,912345632,'SI'),(5,'Gonzalo','Fienco',928123434,982123432,'NO'),(6,'Dora','Minango',912374394,981111142,'SI'),(7,'Kathy','Lomas',928831233,982123342,'SI'),(8,'Hector','Cedeno',965465394,909845742,'NO'),(9,'Ariana','Centeno',929873494,982999942,'NO'),(10,'Juan','Fienco',928837394,934522342,'SI'),(11,'Juan','Cuenca',922344594,982345342,'SI'),(12,'Gordo','Ortega',928837394,982722342,'NO'),(13,'Ronald','Luna',924444394,909872342,'SI'),(14,'Pez','Fernandez',928123494,989876442,'SI'),(15,'Manuel','Vaca',928898984,912343342,'SI'),(16,'Juanf','Falso',928812344,912322342,'SI'),(17,'Fred','Kirst',912227394,985464542,'NO'),(18,'Alexander','Pineda',998765494,965322342,'NO'),(19,'Marco','Mendoza',912342394,982722342,'NO'),(20,'Jovanni','Alburquerque',921232394,923423422,'SI');
+INSERT INTO `Representante` VALUES (1,'ju','re',2,2,'SI'),(2,'m','n',1,1,'NO');
 /*!40000 ALTER TABLE `Representante` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -292,10 +291,9 @@ DROP TABLE IF EXISTS `Venta`;
 CREATE TABLE `Venta` (
   `venta_id` int(11) NOT NULL COMMENT 'venta_detalle, venta_fecha, venta_costo,venta_cantida,venta_IdPersonal(FK), venta_observaciones y compra con: compra_id, compra_detalle, compra_fecha, compra_gasto, compra_IdPersonal, compra_observaciones',
   `venta_detalle` varchar(50) NOT NULL,
-  `venta_fecha` varchar(10) NOT NULL,
+  `venta_fecha` date NOT NULL,
   `venta_costo` decimal(10,2) NOT NULL,
   `venta_cantidad` int(11) NOT NULL,
-  `venta_total` decimal(10,2) NOT NULL,
   `venta_IdPersonal` int(11) NOT NULL,
   `venta_observaciones` varchar(300) DEFAULT NULL,
   PRIMARY KEY (`venta_id`),
@@ -310,32 +308,12 @@ CREATE TABLE `Venta` (
 
 LOCK TABLES `Venta` WRITE;
 /*!40000 ALTER TABLE `Venta` DISABLE KEYS */;
-INSERT INTO `Venta` VALUES (1,'sss','',12.00,12,12.00,3,'hh');
 /*!40000 ALTER TABLE `Venta` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
 -- Dumping routines for database 'PAJA_SYSTEM'
 --
-/*!50003 DROP PROCEDURE IF EXISTS `CompraTotal` */;
-/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
-/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
-/*!50003 SET @saved_col_connection = @@collation_connection */ ;
-/*!50003 SET character_set_client  = utf8 */ ;
-/*!50003 SET character_set_results = utf8 */ ;
-/*!50003 SET collation_connection  = utf8_general_ci */ ;
-/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
-/*!50003 SET sql_mode              = '' */ ;
-DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `CompraTotal`()
-BEGIN
-select sum(compra_gasto) from Venta;
-END ;;
-DELIMITER ;
-/*!50003 SET sql_mode              = @saved_sql_mode */ ;
-/*!50003 SET character_set_client  = @saved_cs_client */ ;
-/*!50003 SET character_set_results = @saved_cs_results */ ;
-/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `contar` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -560,4 +538,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-03-02 15:10:28
+-- Dump completed on 2015-03-02 12:28:30

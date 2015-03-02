@@ -10,10 +10,9 @@ class Ventas(Objeto):
     Cantidad = ''
     Total = ""
     Observaciones = ''
-    id = 0
     headernames = ['Detalle','Fecha', 'Costo', 'Cantidad', 'Total', 'Responsaable','Observaciones']
     atributos = 'venta_id, venta_detalle, venta_fecha, venta_costo,venta_cantidad, venta_IdPersonal, venta_observaciones'
-    tabla = "Venta"
+    tabla = " venta"
   
     def __init__(self):
         self.inicializar()
@@ -52,7 +51,7 @@ class Ventas(Objeto):
     def enlistar(self, listas):
         lista=[]
         for r in listas: 
-            venta = Venta()
+            venta = Ventas()
             venta.mapeardatos(r)
             lista.append(venta)
         return lista

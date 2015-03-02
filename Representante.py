@@ -1,6 +1,7 @@
 from Conexion import *
 from objeto import *
 from Nino import *
+
 class Representante(Objeto):
 
   nombre = ''
@@ -8,11 +9,11 @@ class Representante(Objeto):
   cedula = ''
   telefono = ''
   expreso = ''
-  nInscritos = 0
+  #nInscritos = 0
   parentesco = ''
-  #nino = Nino()
+  nino = Nino()
 
-  headernames = ['Nombre','Apellido','Cedula','Telefono','Expreso','N. Inscritos']
+  headernames = ['Nombre','Apellido','Cedula','Telefono','Expreso']
   atributos = 'representante_id, representante_nombre, \
                representante_apellido,representante_cedula, \
                representante_telefono, \
@@ -20,6 +21,7 @@ class Representante(Objeto):
   tabla = ' representante'
   
   def __init__(self):
+    #self.nino = Nino()
     self.inicializar()
 
  
@@ -29,7 +31,7 @@ class Representante(Objeto):
     conexion = self.conexion.getConnection()
     cursor= conexion.cursor()
     #cursor.execute(consulta, (str(self.id),))
-    cursor.callproc('ingresoRepresentante',(self.id,self.nombre,self.apellido,self.cedula,self.telefono,self.expreso,self.nInscritos))
+    cursor.callproc('ingresoRepresentante',(self.id,self.nombre,self.apellido,self.cedula,self.telefono,self.expreso))
     conexion.commit()
     cursor.close()
 
@@ -53,10 +55,10 @@ class Representante(Objeto):
 
   
   def modificar(self):
-    query = (self.query_update+ 'representante_nombre= %s, representante_apellido= %s,representante_cedula= %s,representante_telefono= %s ,representante_expreso = %s,representante_nInscritos = %s' + self.query_update_end)
+    query = (self.query_update+ 'representante_nombre= %s, representante_apellido= %s,representante_cedula= %s,representante_telefono= %s ,representante_expreso = %s' + self.query_update_end)
     conexion = self.conexion.getConnection()
     cursor= conexion.cursor()
-    cursor.execute(query,(self.nombre,self.apellido,self.cedula,self.telefono,self.expreso,self.nInscritos,self.id))
+    cursor.execute(query,(self.nombre,self.apellido,self.cedula,self.telefono,self.expreso,self.id))
     conexion.commit()
     cursor.close()
 
@@ -85,4 +87,3 @@ class Representante(Objeto):
     self.cedula = datarow[3]
     self.telefono = datarow[4]
     self.expreso = datarow[5]
-    self.nInscritos = datarow[6]   

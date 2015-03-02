@@ -10,7 +10,7 @@
     <x>0</x>
     <y>0</y>
     <width>554</width>
-    <height>478</height>
+    <height>498</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -22,7 +22,7 @@
      <x>10</x>
      <y>20</y>
      <width>541</width>
-     <height>451</height>
+     <height>471</height>
     </rect>
    </property>
    <widget class="QTabWidget" name="tabWidget">
@@ -31,7 +31,7 @@
       <x>0</x>
       <y>0</y>
       <width>531</width>
-      <height>441</height>
+      <height>461</height>
      </rect>
     </property>
     <property name="inputMethodHints">
@@ -50,7 +50,7 @@
         <x>10</x>
         <y>110</y>
         <width>511</width>
-        <height>291</height>
+        <height>301</height>
        </rect>
       </property>
      </widget>
@@ -130,7 +130,7 @@
       <property name="geometry">
        <rect>
         <x>170</x>
-        <y>20</y>
+        <y>10</y>
         <width>211</width>
         <height>31</height>
        </rect>
@@ -148,7 +148,7 @@
       <property name="geometry">
        <rect>
         <x>410</x>
-        <y>215</y>
+        <y>220</y>
         <width>35</width>
         <height>27</height>
        </rect>
@@ -165,7 +165,7 @@ background-color: transparent;
       </property>
       <property name="icon">
        <iconset>
-        <normaloff>Imagenes/personal_agregar.jpeg</normaloff>Imagenes/personal_agregar.jpeg</iconset>
+        <normaloff>../Imagenes/personal_agregar.png</normaloff>../Imagenes/personal_agregar.png</iconset>
       </property>
       <property name="iconSize">
        <size>
@@ -178,7 +178,7 @@ background-color: transparent;
       <property name="geometry">
        <rect>
         <x>150</x>
-        <y>370</y>
+        <y>390</y>
         <width>98</width>
         <height>27</height>
        </rect>
@@ -191,7 +191,7 @@ background-color: transparent;
       <property name="geometry">
        <rect>
         <x>280</x>
-        <y>370</y>
+        <y>390</y>
         <width>98</width>
         <height>27</height>
        </rect>
@@ -204,9 +204,9 @@ background-color: transparent;
       <property name="geometry">
        <rect>
         <x>100</x>
-        <y>60</y>
+        <y>50</y>
         <width>103</width>
-        <height>291</height>
+        <height>321</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -258,7 +258,7 @@ background-color: transparent;
       <property name="geometry">
        <rect>
         <x>220</x>
-        <y>165</y>
+        <y>170</y>
         <width>189</width>
         <height>27</height>
        </rect>
@@ -266,25 +266,31 @@ background-color: transparent;
       <property name="inputMethodHints">
        <set>Qt::ImhFormattedNumbersOnly</set>
       </property>
+      <property name="maxLength">
+       <number>3</number>
+      </property>
      </widget>
      <widget class="QLineEdit" name="txt_observacion">
       <property name="geometry">
        <rect>
         <x>220</x>
-        <y>315</y>
+        <y>320</y>
         <width>189</width>
-        <height>27</height>
+        <height>51</height>
        </rect>
       </property>
       <property name="inputMethodHints">
        <set>Qt::ImhHiddenText</set>
+      </property>
+      <property name="maxLength">
+       <number>200</number>
       </property>
      </widget>
      <widget class="QComboBox" name="cmb_alergia">
       <property name="geometry">
        <rect>
         <x>220</x>
-        <y>265</y>
+        <y>270</y>
         <width>189</width>
         <height>27</height>
        </rect>
@@ -304,20 +310,23 @@ background-color: transparent;
       <property name="geometry">
        <rect>
         <x>220</x>
-        <y>65</y>
+        <y>60</y>
         <width>189</width>
         <height>27</height>
        </rect>
       </property>
       <property name="inputMethodHints">
        <set>Qt::ImhHiddenText</set>
+      </property>
+      <property name="maxLength">
+       <number>25</number>
       </property>
      </widget>
      <widget class="QLineEdit" name="txt_apellido">
       <property name="geometry">
        <rect>
         <x>220</x>
-        <y>115</y>
+        <y>110</y>
         <width>189</width>
         <height>27</height>
        </rect>
@@ -325,12 +334,18 @@ background-color: transparent;
       <property name="inputMethodHints">
        <set>Qt::ImhHiddenText</set>
       </property>
+      <property name="maxLength">
+       <number>25</number>
+      </property>
+      <property name="frame">
+       <bool>true</bool>
+      </property>
      </widget>
      <widget class="QComboBox" name="cmb_representante">
       <property name="geometry">
        <rect>
         <x>220</x>
-        <y>215</y>
+        <y>220</y>
         <width>189</width>
         <height>27</height>
        </rect>
@@ -340,7 +355,7 @@ background-color: transparent;
       <property name="geometry">
        <rect>
         <x>280</x>
-        <y>370</y>
+        <y>390</y>
         <width>98</width>
         <height>27</height>
        </rect>
@@ -358,7 +373,7 @@ background-color: transparent;
       <property name="geometry">
        <rect>
         <x>100</x>
-        <y>370</y>
+        <y>390</y>
         <width>131</width>
         <height>27</height>
        </rect>
@@ -371,7 +386,7 @@ background-color: transparent;
       <property name="geometry">
        <rect>
         <x>300</x>
-        <y>370</y>
+        <y>390</y>
         <width>131</width>
         <height>27</height>
        </rect>
@@ -404,7 +419,7 @@ background-color: transparent;
         <x>10</x>
         <y>60</y>
         <width>511</width>
-        <height>301</height>
+        <height>321</height>
        </rect>
       </property>
      </widget>
