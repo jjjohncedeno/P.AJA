@@ -10,6 +10,8 @@ from Juego import *
 from Nino import *
 from Semillero import *
 from Representante import *
+from Compras import *
+from Ventas import *
 from Conexion import *
 from Oficio import *
 #from Semillero import *
@@ -26,8 +28,10 @@ oficio = uic.loadUiType('./Ventanas/oficio.ui')[0]
 #consultar = uic.loadUiType('consultar.ui')[0]
 #base = uic.loadUiType('base.ui')[0]
 juego=uic.loadUiType('./Ventanas/juego.ui')[0]
-
-
+contabilidad = uic.loadUiType('./Ventanas/contabilidad.ui')[0]
+ventas = uic.loadUiType('./Ventanas/Venta.ui')[0]
+compras = uic.loadUiType('./Ventanas/compras.ui')[0]
+resultados = uic.loadUiType('./Ventanas/resultados.ui')[0]
 class Login(QtGui.QDialog, login):
     #conexion = Conexion()
     def __init__(self,parent=None):
@@ -104,10 +108,10 @@ class Principal(QtGui.QMainWindow, ptaPrincipal):
         self.setStyleSheet(estilo )
         self.btnPersonal.clicked.connect(self.irPersonal)
         self.btnSemillero.clicked.connect(self.irSemillero)
-        #self.btnContabilidad.clicked.connect(self.irContabilidad)
+        self.btnContabilidad.clicked.connect(self.irContabilidad)
         self.btnJuego.clicked.connect(self.irJuego)
         self.btnOficio.clicked.connect(self.irOficio)
-        self.btnContabilidad.hide()
+        self.btnContabilidad.clicked.connect(self.irContabilidad)
 
     def irPersonal(self):
         personal=PantallaPersonal()
@@ -124,9 +128,10 @@ class Principal(QtGui.QMainWindow, ptaPrincipal):
     def irOficio(self):
         oficio=PantallaOficio()
         oficio.exec_()
-    #def irContabilidad(self):
-        #ptaContabilidad=PantallaContabilidad()
-        #ptaContabilidad.exec_()
+    
+    def irContabilidad(self):
+        contabilidad=PantallaContabilidad()
+        contabilidad.exec_()
 	 
 class PantallaPersonal(QtGui.QDialog, personal):
     tmp_name = ''
@@ -217,7 +222,7 @@ class PantallaPersonal(QtGui.QDialog, personal):
         
         for p in busq:
     
-            tmp=[p.id,p.nombre,p.apellido,p.cedula,p.telefono,p.tipo,p.direccion,p.sexo,p.correo,p.carrera,p.facultad]
+            tmp= [p.id,p.nombre,p.apellido,p.cedula,p.telefono,p.tipo,p.direccion,p.sexo,p.correo,p.carrera,p.facultad]
             li = [p.nombre,p.apellido, p.cedula,p.telefono,p.tipo,p.direccion,p.sexo,p.correo,p.carrera,p.facultad]
             self.objetos.append(tmp)
             row = []
@@ -401,7 +406,8 @@ class PantallaNino(QtGui.QDialog, ninos):
         self.tb_objeto.doubleClicked.connect(self.elegir_dobleclick)
     
     def agregarRepresentante(self):
-        representante = PantallaRepresentante(self)
+	representante = self
+        representante = PantallaRepresentante(representante)
         representante.exec_()
 
     def elegir_dobleclick(self):
@@ -677,10 +683,11 @@ class PantallaRepresentante(QtGui.QDialog, representante):
 
 class PantallaJuego(QtGui.QDialog,juego):
     juego=Juego()
-    personal = Personal()
+    
     def __init__(self,parent=None):
         QtGui.QDialog.__init__(self,parent)
         self.setupUi(self)
+        self.personal=Personal()
         self.inicializar()
 
     def inicializar(self):
@@ -830,6 +837,422 @@ class PantallaJuego(QtGui.QDialog,juego):
             self.cargar()
 
 
+class PantallaContabilidad(QtGui.QDialog,contabilidad):
+    def __init__(self,parent=None):
+        QtGui.QDialog.__init__(self,parent)
+        self.setupUi(self)
+        self.inicializar()
+
+    def inicializar(self):
+        self.btnCompras.clicked.connect(self.Compras)
+        self.btnVentas.clicked.connect(self.Ventas)
+        self.btnResultados.clicked.connect(self.Resultados)
+        self.setStyleSheet(estilo)
+ 
+    def Compras(self):
+        compras = PantallaCompras()
+        compras.exec_()    
+
+    def Ventas(self):
+        ventas = PantallaVentas()
+        ventas.exec_()
+
+    def Resultados(self):
+        resultados = PantallaResultados()
+        resultados.exec_()
+
+class PantallaVentas(QtGui.QDialog,ventas):
+    venta = Ventas()
+    tmpCantidad = ""
+    tmpCosto = ""
+    def __init__(self,parent=None):
+        QtGui.QDialog.__init__(self,parent)
+        self.setupUi(self)
+        self.personal=Personal()
+        self.inicializar()
+        
+    def LlenarCombo(self):
+        for p in self.personal.consultar_todos():
+            self.cmbResponsable.addItem(p.nombre,p.id)
+
+    def inicializar(self):
+        ventas=[]
+        self.txtTotal.setText('0')
+        self.LlenarCombo()
+        self.setStyleSheet(estilo)
+        self.btnGuardar.clicked.connect(self.guardar)
+        self.btnLimpiar.clicked.connect(self.limpiar)
+        self.btnEliminar.clicked.connect(self.borrarTodo)
+        self.tbaVenta.doubleClicked.connect(self.elegir_dobleclick)
+        self.tbaVentaEliminar.doubleClicked.connect(self.borrarSelec)
+        self.txtCosto.textChanged.connect(lambda: self.onlyDigit('costo,' + self.txtCosto.text()))
+        self.txtCantidad.textChanged.connect(lambda: self.onlyDigit('cantidad,'+ self.txtCantidad.text())) 
+        self.cargar()
+ 
+    def onlyDigit(self,texto):
+        try:
+            number = str(texto.split(',')[1])
+            name = str(texto.split(',')[0])
+
+            if number != '':
+                if not ((number.replace(' ','')).isdigit() and (number.replace('.','')).isdigit()) :
+                    QMessageBox.about(self,"ERROR","Ingresar solo digitos")
+                    if name == 'cantidad':
+                        self.txtCantidad.setText(self.tmpCantidad)
+                    elif name == 'costo':
+                        self.txtCosto.setText(self.tmpCosto)
+
+                else:
+                    if len(number) == 1:
+                        self.tmpCantidad = ''
+                        self.tmpCosto = ''
+                    else:
+                        if name == 'cantidad':
+                            self.tmpCantidad = number
+                        elif name == 'costo':
+                            self.tmpCosto = number
+		
+        except:
+            name = str(texto.split(',')[0])
+            QMessageBox.about(self,"ERROR","Ingresar solo digitos")
+											
+            if name == 'cantidad':
+                self.tmpCantidad=''
+                self.txtCantidad.setText('')
+            elif name == 'costo':
+                self.tmpCosto=''
+                self.txtCosto.setText('')
+
+        if self.txtCosto.text()=='' or self.txtCantidad.text()=='':
+            self.txtTotal.setText('0')
+        else:
+            costo = float(self.txtCosto.text())
+            cantidad = int(self.txtCantidad.text())
+            total = costo*cantidad
+            self.txtTotal.setText(str(total)) 
+
+    def validacion(self):
+       
+        if(self.txtDetalle.text()=="" or self.txtCantidad.text()=="" or self.txtCosto.text()==""):
+            return True            
+        else:
+            return False
+
+    def guardar(self):
+        if self.validacion():
+            QMessageBox.about(self,"ERROR","Ingresar todos los datos")
+           
+        else:
+            self.venta.Detalle = str(self.txtDetalle.text())
+            self.venta.Costo = str(self.txtCosto.text())
+            self.venta.Cantidad = str(self.txtCantidad.text())
+            self.venta.Fecha = str(self.dteFecha.text())
+            self.venta.Total = str(self.txtTotal.text())
+            self.venta.personal.id = (self.cmbResponsable.itemData(self.cmbResponsable.currentIndex())).toInt()[0]
+            self.venta.Observaciones = str(self.txtObservaciones.toPlainText())
+            self.venta.guardar()
+            self.limpiar()
+            QMessageBox.about(self,"Correcto","Venta guardado con exito")
+            self.cargar()
+             
+    
+    def limpiar(self):
+        self.txtDetalle.setText('')
+        self.txtCosto.setText('')
+        self.txtCantidad.setText('')
+        self.txtTotal.setText('')
+        self.txtObservaciones.setText('')
+   
+    def cargar(self, atribute=None, name=None):
+        model = QStandardItemModel()
+        model.setColumnCount(7)
+        model.setHorizontalHeaderLabels(self.venta.headernames)
+        busq1 = []
+        self.ventas=[]
+        if (atribute is not None) and (name is not None):
+            if name == 'Detalle' or name == 'Fecha':
+                busq1 = self.venta.consultar_By_Atribute(atribute,name)
+            else:
+                busq1=[]        
+        else:
+             busq1 = self.venta.consultar_todos()
+
+        for v in busq1:
+            tmp = [v.id, v.Detalle, v.Costo, v.Cantidad, v.Total, v.Observaciones, v.personal]
+            li = [v.id, v.Detalle, v.Costo, v.Cantidad, v.Total, v.Observaciones, v.personal]
+            self.ventas.append(tmp)
+            row = []
+            for name in li:
+                item = QStandardItem(str(name))
+                item.setEditable(False)
+                row.append(item)
+
+            model.appendRow(row)
+        self.tbaVenta.setModel(model)
+        self.tbaVentaEliminar.setModel(model)
+
+    def elegir_dobleclick(self):
+        selected = self.tbaVenta.selectedIndexes()
+        selected_index = selected.__getitem__(0)
+        select = self.ventas[selected_index.row()]
+        self.tabWidget.setCurrentWidget(self.tab_1)
+        self.venta.id = select[0]
+        self.txtDetalle.setText(select[1])
+        self.txtCosto.setText(select[2])
+        self.txtCantidad.setText(select[3])
+        self.txtTotal.setText(select[4])
+        self.txtObservaciones.setText(select[5])
+
+    def borrarTodo(self):
+        try:
+            rst=QMessageBox.warning(self,"Alerta","Esta seguro que desea eliminar", QMessageBox.Cancel, QMessageBox.Ok)
+            if rst == QMessageBox.Ok:
+                self.venta.borrarVentas()
+                QMessageBox.about(self,"Correcto", "Se ha eliminado todo el personal")
+        except:
+            QMessageBox.about(self,"Error", "Problemas con la base de datos")
+        self.cargar()
+
+    def borrarSelec(self):
+        try:
+            selected = self.tbaOficioEliminar.selectedIndexes()
+            selected_index = selected.__getitem__(0)
+            select = self.ventas[selected_index.row()]
+            self.oficio.id = select[0]
+
+            rst=QMessageBox.warning(self,"Alerta","Esta seguro que desea eliminar", QMessageBox.Cancel, QMessageBox.Ok)
+            if rst == QMessageBox.Ok:
+                self.venta.borrarVentas()
+                QMessageBox.about(self,"Correcto", "Se ha eliminado la venta")
+        except:
+            QMessageBox.about(self,"Error", "Problemas con la base de datos")
+        self.cargar()
+
+    
+    def buscar(self):
+        atribute= (str(self.txtBuscar.text())).strip()
+        name=''
+        print atribute
+        if atribute != '':
+            if self.rdoDetalle.isChecked():
+                name= 'Detalle'
+                self.cargar(atribute,name)
+            elif self.rdoFecha.isChecked():
+                name= 'Fecha'
+                self.cargar(atribute,name)
+            else:
+                self.cargar()
+        else:
+            self.cargar()
+
+
+class PantallaResultados(QtGui.QDialog,resultados):
+    ventas=0
+    compras=0
+    total = 0
+    def __init__(self,parent=None):
+        QtGui.QDialog.__init__(self,parent)
+        self.setupUi(self)
+        self.inicializar()
+
+    def inicializar(self):
+        self.setStyleSheet(estilo)
+        self.totalCompras()
+        self.totalVentas()
+        self.total=self.ventas-self.compras
+        txtCompras.setText(str(self.compras))
+        txtVentas.setText(str(self.ventas))
+        txtTotal.setText(str(self.total))
+
+    def totalCompras(self):
+        conexion = self.conexion.getConnection()
+        cursor = conexion.cursor()
+        cursor.execute("call CompraTotal()")
+        result=cursor.fetchall()
+        if result is None:
+            self.compras=0
+        else:
+            self.compras = float(result[0])
+        cursor.close
+            
+
+    def totalVentas(self):
+        conexion = self.conexion.getConnection()
+        cursor = conexion.cursor()
+        cursor.execute("call VentaTotal()")
+        result=cursor.fetchall()
+        if result is None:
+            self.ventas=0
+        else:
+            self.ventas = float(result[0])
+        cursor.close
+        
+class PantallaCompras(QtGui.QDialog,compras):
+    compra = Compras()
+    tmpGasto = ''
+    def __init__(self,parent=None):
+        QtGui.QDialog.__init__(self,parent)
+        self.setupUi(self)
+        self.personal=Personal()
+        self.inicializar()
+        
+    def LlenarCombo(self):
+        for p in self.personal.consultar_todos():
+            self.cmbResponsable.addItem(p.nombre,p.id)
+
+    def inicializar(self):
+        ventas=[]
+        self.LlenarCombo()
+        self.setStyleSheet(estilo)
+        self.btnGuardar.clicked.connect(self.guardar)
+        self.btnLimpiar.clicked.connect(self.limpiar)
+        self.btnEliminar.clicked.connect(self.borrarTodo)
+        self.tbaCompras.doubleClicked.connect(self.elegir_dobleclick)
+        self.txtGasto.textChanged.connect(lambda: self.onlyDigit('gasto,'+ self.txtGasto.text()))
+        self.tbaComprasEliminar.doubleClicked.connect(self.borrarSelec)
+        self.cargar()
+
+    def onlyDigit(self,texto):
+        try:
+            number = str(texto.split(',')[1])
+            name = str(texto.split(',')[0])
+
+            if number != '':
+                if not ((number.replace(' ','')).isdigit() and (number.replace('.','')).isdigit()) :
+                    QMessageBox.about(self,"ERROR","Ingresar solo digitos")
+                    if name == 'gasto':
+                        self.txtGasto.setText(self.tmpGasto)
+                else:
+                    if len(number) == 1:
+                        self.tmpGasto = ''
+
+                    else:
+                        if name == 'gasto':
+                            self.tmpGasto = number
+	
+        except:
+            name = str(texto.split(',')[0])
+            QMessageBox.about(self,"ERROR","Ingresar solo digitos")
+											
+            if name == 'gasto':
+                self.tmpGasto=''
+                self.txtGasto.setText('')
+
+    def validacion(self):
+       
+        if(self.txtDetalle.text()=="" or self.txtTipo.text()=="" or self.txtGasto.text()==""):
+            return True            
+        else:
+            return False
+
+    def guardar(self):
+        if self.validacion():
+            QMessageBox.about(self,"ERROR","Ingresar todos los datos")
+           
+        else:
+            self.compra.Detalle = str(self.txtDetalle.text())
+            self.compra.Gasto = str(self.txtGasto.text())
+            self.compra.Fecha = str(self.dteFecha.text())
+            self.compra.Tipo = str(self.txtTipo.text())
+            self.compra.personal.id = (self.cmbEncargado.itemData(self.cmbEncargado.currentIndex())).toInt()[0]
+            self.compra.Observaciones = str(self.txtObservaciones.PlainText())
+            self.compra.guardar()
+            self.limpiar()
+            QMessageBox.about(self,"Correcto","Venta guardado con exito")
+            self.cargar()
+             
+    
+    def limpiar(self):
+        self.txtDetalle.setText('')
+        self.txtGasto.setText('')
+        self.txtObsevaciones.setText('')
+        self.txtTipo.setText('')
+        self.txtObservaciones.setText('')
+   
+    def cargar(self, atribute=None, name=None):
+        model = QStandardItemModel()
+        model.setColumnCount(7)
+        model.setHorizontalHeaderLabels(self.compra.headernames)
+        busq1 = []
+        self.compras=[]
+        if (atribute is not None) and (name is not None):
+            if name == 'Detalle' or name == 'Fecha':
+                busq1 = self.compra.consultar_By_Atribute(atribute,name)
+            else:
+                busq1=[]        
+        else:
+             busq1 = self.compra.consultar_todos()
+
+        for c in busq1:
+            tmp = [c.id, c.Detalle, c.Gasto, v.Fecha, v.Tipo, v.Observaciones, v.personal]
+            li = [c.id, c.Detalle, c.Gasto, c.Fecha, c.Tipo, c.Observaciones, c.personal]
+            self.compras.append(tmp)
+            row = []
+            for name in li:
+                item = QStandardItem(str(name))
+                item.setEditable(False)
+                row.append(item)
+
+            model.appendRow(row)
+        self.tbaCompras.setModel(model)
+        self.tbaComprasEliminar.setModel(model)
+
+    def elegir_dobleclick(self):
+        selected = self.tbaCompras.selectedIndexes()
+        selected_index = selected.__getitem__(0)
+        select = self.compras[selected_index.row()]
+        self.tabWidget.setCurrentWidget(self.tab_1)
+        self.compra.id = select[0]
+        self.txtDetalle.setText(select[1])
+        self.txtGasto.setText(select[2])
+        self.txtTipo.setText(select[3])
+        self.dteFecha.setText(select[4])
+        self.txtObservaciones.setText(select[5])
+
+    def borrarTodo(self):
+        try:
+            rst=QMessageBox.warning(self,"Alerta","Esta seguro que desea eliminar", QMessageBox.Cancel, QMessageBox.Ok)
+            if rst == QMessageBox.Ok:
+                self.compra.borrarCompras()
+                QMessageBox.about(self,"Correcto", "Se ha eliminado todo el personal")
+        except:
+            QMessageBox.about(self,"Error", "Problemas con la base de datos")
+        self.cargar()
+
+    def borrarSelec(self):
+        try:
+            selected = self.tbaOficioEliminar.selectedIndexes()
+            selected_index = selected.__getitem__(0)
+            select = self.compras[selected_index.row()]
+            self.compra.id = select[0]
+
+            rst=QMessageBox.warning(self,"Alerta","Esta seguro que desea eliminar", QMessageBox.Cancel, QMessageBox.Ok)
+            if rst == QMessageBox.Ok:
+                self.compra.borrarCompras()
+                QMessageBox.about(self,"Correcto", "Se ha eliminado la venta")
+        except:
+            QMessageBox.about(self,"Error", "Problemas con la base de datos")
+        self.cargar()
+
+    
+    def buscar(self):
+        atribute= (str(self.txtBuscar.text())).strip()
+        name=''
+        print atribute
+        if atribute != '':
+            if self.rdoDetalle.isChecked():
+                name= 'Detalle'
+                self.cargar(atribute,name)
+            elif self.rdoFecha.isChecked():
+                name= 'Fecha'
+                self.cargar(atribute,name)
+            else:
+                self.cargar()
+        else:
+            self.cargar()
+
+
+
 class PantallaOficio(QtGui.QDialog,oficio):
     oficio=Oficio()
     
@@ -847,7 +1270,6 @@ class PantallaOficio(QtGui.QDialog,oficio):
         self.btnEliminar.clicked.connect(self.borrarTodo)
         self.tbaOficio.doubleClicked.connect(self.elegir_dobleclick)
         #self.btnBuscar.clicked.connect(self.buscar)
-        self.LlenarCombo()
         self.tbaOficioEliminar.doubleClicked.connect(self.borrarSelec)        
 	#self.txtNombre.textChanged.connect(self.onlyTextName)
         self.cargar()
@@ -870,7 +1292,7 @@ class PantallaOficio(QtGui.QDialog,oficio):
             self.oficio.Tramite = str(self.txtTramite.text())
             self.oficio.Respuesta = str(self.txtRespuesta.text())
             self.oficio.Observaciones = str(self.txtObservaciones.text())
-            self.oficio.personal.id = (self.cmbResponsable.itemData(self.cmbResponsable.currentIndex())).toInt()[0]
+            self.oficio.personal = str(1)
             self.oficio.guardar()
             self.limpiar()
             QMessageBox.about(self,"Correcto","Oficio guardado con exito")
@@ -928,7 +1350,7 @@ class PantallaOficio(QtGui.QDialog,oficio):
     
     def LlenarCombo(self):
         for p in self.personal.consultar_todos():
-            self.cmbResponsable.addItem(p.nombre,p.id)
+            self.cmbResponsable.addItem(p.nombre)
 
     def borrarTodo(self):
         try:
