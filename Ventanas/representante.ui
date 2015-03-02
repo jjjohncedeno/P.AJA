@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>dialog_cliente</class>
- <widget class="QDialog" name="dialog_cliente">
+ <class>dialog_representante</class>
+ <widget class="QDialog" name="dialog_representante">
   <property name="windowModality">
    <enum>Qt::WindowModal</enum>
   </property>
@@ -14,7 +14,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Cliente</string>
+   <string>Representante</string>
   </property>
   <widget class="QWidget" name="widget" native="true">
    <property name="geometry">
@@ -44,7 +44,7 @@
      <attribute name="title">
       <string>Consultar</string>
      </attribute>
-     <widget class="QTableView" name="tb_representante">
+     <widget class="QTableView" name="tb_objeto">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -157,36 +157,6 @@
        <string>INGRESAR REPRESENTANTE</string>
       </property>
      </widget>
-     <widget class="QPushButton" name="btn_representante">
-      <property name="geometry">
-       <rect>
-        <x>420</x>
-        <y>285</y>
-        <width>35</width>
-        <height>27</height>
-       </rect>
-      </property>
-      <property name="styleSheet">
-       <string notr="true">#btn_representante {
-border: 1px solid transparent;
-background-color: transparent;
-
-}</string>
-      </property>
-      <property name="text">
-       <string/>
-      </property>
-      <property name="icon">
-       <iconset>
-        <normaloff>Imagenes/personal_agregar.jpeg</normaloff>Imagenes/personal_agregar.jpeg</iconset>
-      </property>
-      <property name="iconSize">
-       <size>
-        <width>35</width>
-        <height>27</height>
-       </size>
-      </property>
-     </widget>
      <widget class="QPushButton" name="btn_limpiar">
       <property name="geometry">
        <rect>
@@ -219,7 +189,7 @@ background-color: transparent;
         <x>220</x>
         <y>60</y>
         <width>191</width>
-        <height>293</height>
+        <height>301</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout">
@@ -228,6 +198,9 @@ background-color: transparent;
          <property name="inputMethodHints">
           <set>Qt::ImhHiddenText</set>
          </property>
+         <property name="maxLength">
+          <number>25</number>
+         </property>
         </widget>
        </item>
        <item>
@@ -235,16 +208,50 @@ background-color: transparent;
          <property name="inputMethodHints">
           <set>Qt::ImhHiddenText</set>
          </property>
+         <property name="maxLength">
+          <number>25</number>
+         </property>
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="txt_cedula"/>
+        <widget class="QLineEdit" name="txt_cedula">
+         <property name="maxLength">
+          <number>10</number>
+         </property>
+        </widget>
        </item>
        <item>
         <widget class="QLineEdit" name="txt_telefono">
          <property name="inputMethodHints">
           <set>Qt::ImhFormattedNumbersOnly</set>
          </property>
+         <property name="maxLength">
+          <number>12</number>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QComboBox" name="cmb_parentesco">
+         <item>
+          <property name="text">
+           <string>Padre</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Madre</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Tio(a)</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Hermano(a)</string>
+          </property>
+         </item>
         </widget>
        </item>
        <item>
@@ -259,16 +266,6 @@ background-color: transparent;
            <string>NO</string>
           </property>
          </item>
-        </widget>
-       </item>
-       <item>
-        <widget class="QLineEdit" name="txt_semillero">
-         <property name="enabled">
-          <bool>false</bool>
-         </property>
-         <property name="inputMethodHints">
-          <set>Qt::ImhHiddenText</set>
-         </property>
         </widget>
        </item>
        <item>
@@ -322,16 +319,16 @@ background-color: transparent;
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label_12">
+        <widget class="QLabel" name="label_11">
          <property name="text">
-          <string>Expreso</string>
+          <string>Parentesco</string>
          </property>
         </widget>
        </item>
        <item>
-        <widget class="QLabel" name="label_5">
+        <widget class="QLabel" name="label_12">
          <property name="text">
-          <string>Semillero</string>
+          <string>Expreso</string>
          </property>
         </widget>
        </item>
@@ -343,6 +340,19 @@ background-color: transparent;
         </widget>
        </item>
       </layout>
+     </widget>
+     <widget class="QPushButton" name="btn_anadir">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>370</y>
+        <width>98</width>
+        <height>27</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Anadir</string>
+      </property>
      </widget>
     </widget>
     <widget class="QWidget" name="tab">
@@ -393,7 +403,7 @@ background-color: transparent;
        <string>ELIMINAR REPRESENTANTE</string>
       </property>
      </widget>
-     <widget class="QTableView" name="tb_representante_eliminar">
+     <widget class="QTableView" name="tb_objeto_eliminar">
       <property name="geometry">
        <rect>
         <x>10</x>

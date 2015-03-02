@@ -18,6 +18,35 @@ USE `PAJA_SYSTEM`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `Compra`
+--
+
+DROP TABLE IF EXISTS `Compra`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Compra` (
+  `compra_id` int(11) NOT NULL,
+  `compra_detalle` varchar(50) NOT NULL,
+  `compra_fecha` date NOT NULL,
+  `compra_gasto` decimal(10,2) NOT NULL,
+  `compra_IdPersonal` int(11) NOT NULL,
+  `compra_observaciones` varchar(300) DEFAULT NULL,
+  PRIMARY KEY (`compra_id`),
+  KEY `compra_IdPersonal` (`compra_IdPersonal`),
+  CONSTRAINT `fk_Compra_1` FOREIGN KEY (`compra_IdPersonal`) REFERENCES `Personal` (`personal_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Compra`
+--
+
+LOCK TABLES `Compra` WRITE;
+/*!40000 ALTER TABLE `Compra` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Compra` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `Juego`
 --
 
@@ -106,6 +135,7 @@ CREATE TABLE `Oficio` (
 
 LOCK TABLES `Oficio` WRITE;
 /*!40000 ALTER TABLE `Oficio` DISABLE KEYS */;
+INSERT INTO `Oficio` VALUES (1,'hola','xhao','Recibido','909','kjk','jkj',1);
 /*!40000 ALTER TABLE `Oficio` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -138,8 +168,37 @@ CREATE TABLE `Personal` (
 
 LOCK TABLES `Personal` WRITE;
 /*!40000 ALTER TABLE `Personal` DISABLE KEYS */;
-INSERT INTO `Personal` VALUES (1,'julio','realpe',49,494,'Ayudante','fjkf','Masculino','j@gmail.com','fj','jk'),(2,'Teresa','Echeverria',912345678,991837635,'Profesor','Calle Salinas','Masculino','teche@gmail.com','Ing. Marketing','FEN'),(3,'john','Cedeno',916718283,2147483647,'Personal Contratado','Mapasingue ','Masculino','jjj@gmail.com','ing. Computacion','FIEC'),(4,'Juan','Vaca',987654321,2147483647,'Voluntario','Sauces','Masculino','jjvaca@gmail.com','Ing. Computacion','FIEC'),(5,'David','Pazmino',987678768,2147483647,'Profesor','Sur','Masculino','david@gmail.com','Ing. Potencia','FIEC'),(6,'Sheila','Gallegos',987676578,987654536,'Ayudante','Duran','Femenino','shei@yahoo.com','Ing. ELectrica','FIEC'),(7,'Katty Mary','Hermenejildo de Cedeno',989878767,987678765,'Profesor','Salinas','Femenino','lachiquita@hotmail.com','Diseno Grafico','EDCOM'),(8,'Gonzalo','Iturburu',1001234567,987567485,'Personal Contratado','ALborada','Masculino','wachitoto@gmail.com','Ing. Alimentos','FICT'),(9,'Carlo','Lecaro',989543426,972635463,'Voluntario','Sur Portete','Masculino','muerte666@gmail.com','Ing. Electronica','FIEC'),(10,'Israel','Fernandez',1002345869,2147483647,'Profesor','Manabi','Masculino','is94@hotmail.com','Ing. Mecatronica','FIMCP'),(11,'Alejandro','Espana',99889,887,'Ayudante','durn','Masculino','r@hotmail.com','fisica','fisica');
+INSERT INTO `Personal` VALUES (1,'julio','realpe',49,494,'Ayudante','fjkf','Masculino','j@gmail.com','fj','jk'),(2,'Teresa','Echeverria',912345678,991837635,'Profesor','Calle Salinas','Masculino','teche@gmail.com','Ing. Marketing','FEN'),(3,'john','Cedeno',916718283,2147483647,'Personal Contratado','Mapasingue ','Masculino','jjj@gmail.com','ing. Computacion','FIEC'),(4,'Juan','Vaca',987654321,2147483647,'Voluntario','Sauces','Masculino','jjvaca@gmail.com','Ing. Computacion','FIEC'),(5,'David','Pazmino',987678768,2147483647,'Profesor','Sur','Masculino','david@gmail.com','Ing. Potencia','FIEC'),(6,'Sheila','Gallegos',987676578,987654536,'Ayudante','Duran','Femenino','shei@yahoo.com','Ing. ELectrica','FIEC'),(7,'Katty Mary','Hermenejildo de Cedeno',989878767,987678765,'Profesor','Salinas','Femenino','lachiquita@hotmail.com','Diseno Grafico','EDCOM'),(8,'Gonzalo','Iturburu',1001234567,987567485,'Personal Contratado','ALborada','Masculino','wachitoto@gmail.com','Ing. Alimentos','FICT'),(9,'Carlo','Lecaro',989543426,972635463,'Voluntario','Sur Portete','Masculino','muerte666@gmail.com','Ing. Electronica','FIEC'),(10,'Israel','Fernandez',1002345869,2147483647,'Profesor','Manabi','Masculino','is94@hotmail.com','Ing. Mecatronica','FIMCP'),(11,'Alejandro','Espana',99889,887,'Ayudante','durn','Masculino','r@hotmail.com','fisica','fisica'),(12,'Chucha ','que si guarda ',98,123,'Ayudante','bien!!','Masculino','l@gmail.com','a','a');
 /*!40000 ALTER TABLE `Personal` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Representacion`
+--
+
+DROP TABLE IF EXISTS `Representacion`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Representacion` (
+  `representacion_id` int(11) NOT NULL,
+  `representacion_parentesco` varchar(45) DEFAULT NULL,
+  `representacion_representante` int(11) NOT NULL,
+  `representacion_nino` int(11) NOT NULL,
+  PRIMARY KEY (`representacion_id`),
+  KEY `representacion_representante` (`representacion_representante`),
+  KEY `representacion_nino` (`representacion_nino`),
+  CONSTRAINT `fk_Representacion_1` FOREIGN KEY (`representacion_representante`) REFERENCES `Representante` (`representante_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Representacion_2` FOREIGN KEY (`representacion_nino`) REFERENCES `Nino` (`nino_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Representacion`
+--
+
+LOCK TABLES `Representacion` WRITE;
+/*!40000 ALTER TABLE `Representacion` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Representacion` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -153,11 +212,11 @@ CREATE TABLE `Representante` (
   `representante_id` int(11) NOT NULL,
   `representante_nombre` varchar(25) NOT NULL,
   `representante_apellido` varchar(25) NOT NULL,
+  `representante_cedula` int(10) NOT NULL,
   `representante_telefono` int(12) NOT NULL,
   `representante_expreso` varchar(3) NOT NULL,
   `representante_nInscritos` int(12) NOT NULL,
-  `representante_nino` int(12) NOT NULL,
-  PRIMARY KEY (`representante_id`,`representante_nino`)
+  PRIMARY KEY (`representante_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -167,6 +226,7 @@ CREATE TABLE `Representante` (
 
 LOCK TABLES `Representante` WRITE;
 /*!40000 ALTER TABLE `Representante` DISABLE KEYS */;
+INSERT INTO `Representante` VALUES (1,'ju','re',94,2234,'SI',0);
 /*!40000 ALTER TABLE `Representante` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -221,6 +281,36 @@ CREATE TABLE `Usuario` (
 LOCK TABLES `Usuario` WRITE;
 /*!40000 ALTER TABLE `Usuario` DISABLE KEYS */;
 /*!40000 ALTER TABLE `Usuario` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `Venta`
+--
+
+DROP TABLE IF EXISTS `Venta`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Venta` (
+  `venta_id` int(11) NOT NULL COMMENT 'venta_detalle, venta_fecha, venta_costo,venta_cantida,venta_IdPersonal(FK), venta_observaciones y compra con: compra_id, compra_detalle, compra_fecha, compra_gasto, compra_IdPersonal, compra_observaciones',
+  `venta_detalle` varchar(50) NOT NULL,
+  `venta_fecha` date NOT NULL,
+  `venta_costo` decimal(10,2) NOT NULL,
+  `venta_cantidad` int(11) NOT NULL,
+  `venta_IdPersonal` int(11) NOT NULL,
+  `venta_observaciones` varchar(300) DEFAULT NULL,
+  PRIMARY KEY (`venta_id`),
+  KEY `venta_IdPersonal` (`venta_IdPersonal`),
+  CONSTRAINT `fk_Venta_1` FOREIGN KEY (`venta_IdPersonal`) REFERENCES `Personal` (`personal_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `Venta`
+--
+
+LOCK TABLES `Venta` WRITE;
+/*!40000 ALTER TABLE `Venta` DISABLE KEYS */;
+/*!40000 ALTER TABLE `Venta` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -309,6 +399,26 @@ DELIMITER ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
 /*!50003 SET character_set_results = @saved_cs_results */ ;
 /*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `ingresoRepresentante` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8 */ ;
+/*!50003 SET character_set_results = utf8 */ ;
+/*!50003 SET collation_connection  = utf8_general_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = '' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `ingresoRepresentante`(in cod int, in nombre varchar(25),in apellido varchar(25), 
+in cedula int,in telefono int,in expreso varchar(3), in nInscirtos int)
+BEGIN INSERT INTO Representante VALUES(cod,nombre,apellido,cedula,telefono,expreso,nInscirtos);
+
+END ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `modificoJuego` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -390,4 +500,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-02-28 14:30:12
+-- Dump completed on 2015-03-01 12:49:56

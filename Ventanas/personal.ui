@@ -44,7 +44,7 @@
      <attribute name="title">
       <string>Consultar</string>
      </attribute>
-     <widget class="QTableView" name="tb_personal">
+     <widget class="QTableView" name="tb_objeto">
       <property name="geometry">
        <rect>
         <x>10</x>
@@ -437,7 +437,7 @@
        <string>ELIMINAR PERSONAL</string>
       </property>
      </widget>
-     <widget class="QTableView" name="tb_personal_eliminar">
+     <widget class="QTableView" name="tb_objeto_eliminar">
       <property name="geometry">
        <rect>
         <x>10</x>
