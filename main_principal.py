@@ -858,11 +858,11 @@ class PantallaVentas(QtGui.QDialog,ventas):
         else:
             self.venta.Detalle = str(self.txtDetalle.text())
             self.venta.Costo = str(self.txtCosto.text())
-            self.venta.Cantidad = str(self.txtCantidad.txt())
-            self.venta.Fecha = str(self.txtFecha.text())
+            self.venta.Cantidad = str(self.txtCantidad.text())
+            self.venta.Fecha = str(self.dteFecha.text())
             self.venta.Total = str(self.txtTotal.text())
-            self.juego.personal.id = (self.cmbResponsable.itemData(self.cmbResponsable.currentIndex())).toInt()[0]
-            self.venta.Observaciones = str(self.txtObservaciones())
+            self.venta.personal.id = (self.cmbResponsable.itemData(self.cmbResponsable.currentIndex())).toInt()[0]
+            self.venta.Observaciones = str(self.txtObservaciones.toPlainText())
             self.venta.guardar()
             self.limpiar()
             QMessageBox.about(self,"Correcto","Venta guardado con exito")
@@ -960,6 +960,9 @@ class PantallaVentas(QtGui.QDialog,ventas):
 
 
 class PantallaResultados(QtGui.QDialog,resultados):
+    ventas=0
+    compras=0
+    total = 0
     def __init__(self,parent=None):
         QtGui.QDialog.__init__(self,parent)
         self.setupUi(self)
@@ -967,7 +970,36 @@ class PantallaResultados(QtGui.QDialog,resultados):
 
     def inicializar(self):
         self.setStyleSheet(estilo)
+        self.totalCompras()
+        self.totalVentas()
+        self.total=self.ventas-self.compras
+        txtCompras.setText(str(self.compras))
+        txtVentas.setText(str(self.ventas))
+        txtTotal.setText(str(self.total))
 
+    def totalCompras(self):
+        conexion = self.conexion.getConnection()
+        cursor = conexion.cursor()
+        cursor.execute("call CompraTotal()")
+        result=cursor.fetchall()
+        if result is None:
+            self.compras=0
+        else:
+            self.compras = float(result[0])
+        cursor.close
+            
+
+    def totalVentas(self):
+        conexion = self.conexion.getConnection()
+        cursor = conexion.cursor()
+        cursor.execute("call VentaTotal()")
+        result=cursor.fetchall()
+        if result is None:
+            self.ventas=0
+        else:
+            self.ventas = float(result[0])
+        cursor.close
+        
 class PantallaCompras(QtGui.QDialog,compras):
     compra = Compras()
     tmpGasto = ''
@@ -1035,8 +1067,8 @@ class PantallaCompras(QtGui.QDialog,compras):
             self.compra.Gasto = str(self.txtGasto.text())
             self.compra.Fecha = str(self.dteFecha.text())
             self.compra.Tipo = str(self.txtTipo.text())
-            self.juego.personal.id = (self.cmbEncargado.itemData(self.cmbEncargado.currentIndex())).toInt()[0]
-            self.compra.Observaciones = str(self.txtObservaciones())
+            self.compra.personal.id = (self.cmbEncargado.itemData(self.cmbEncargado.currentIndex())).toInt()[0]
+            self.compra.Observaciones = str(self.txtObservaciones.PlainText())
             self.compra.guardar()
             self.limpiar()
             QMessageBox.about(self,"Correcto","Venta guardado con exito")
